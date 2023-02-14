@@ -10,7 +10,7 @@ const __dirname = path.dirname(__fileName)
 
 const rootPath = path.resolve(__dirname, './')
 
-const dataPath = rootPath + '/src/configs'
+const dataPath = rootPath + '/src/configs/data.json'
 
 
 console.log('__fileName:', __fileName)
