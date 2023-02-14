@@ -115,7 +115,7 @@ const getFundInfoTask = async () => {
 
     if (list.length > 0) {
       const isExist = list.some(item => {
-        return item.date == dateFormater('YYYY-MM-DD', arr[0].gztime)
+        return item.date == dateFormater('YYYY-MM-DD', arr[0].jzrq)
       })
       if (!isExist) {
         list.push({
