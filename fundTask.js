@@ -116,6 +116,7 @@ const getFundInfoTask = async () => {
       const isExist = list.some(item => {
         return item.date == dateFormater('YYYY-MM-DD', arr[0].jzrq)
       })
+      console.log({isExist})
       if (!isExist) {
         list.push({
           date: dateFormater('YYYY-MM-DD', arr[0].jzrq),
@@ -123,7 +124,7 @@ const getFundInfoTask = async () => {
         })
       } else {
         list.forEach(item => {
-          if (item.date == dateFormater('YYYY-MM-DD')) {
+          if ((item.date == arr[0].jzrq) && (item.details[0].gztime != arr[0].gztime)) {
             item.details = arr
           }
         })
