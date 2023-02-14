@@ -111,7 +111,6 @@ const getFundInfoTask = async () => {
     arr.push(data8);
     console.log(arr);
     let list = readDataList(dataPath)
-    console.log(list)
 
     if (list.length > 0) {
       const isExist = list.some(item => {
@@ -131,13 +130,13 @@ const getFundInfoTask = async () => {
       }
     } else {
       list.push({
-        date: dateFormater('YYYY-MM-DD'),
+        date: arr[0] ? arr[0].jzrq : dateFormater('YYYY-MM-DD'),
         details: arr
       })
     }
 
     console.log(list)
-    // writeDataList(dataPath, list)
+    writeDataList(dataPath, list)
   } catch (error) {
     console.error(error);
   }

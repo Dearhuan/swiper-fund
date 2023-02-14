@@ -26,17 +26,17 @@ jobs:
       - name: Start task
         run: node fundTask.js
 
-      # # 提交并推送修改
-      # - name: Commit files
-      #   run: |
-      #     git config --local user.email "actions@github.com"
-      #     git config --local user.name "GitHub Action"
-      #     git add .
-      #     git commit -m "update ncov_china_info md file"
-      # - name: Push changes
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.ACCESS_TOKEN }}
+      # 提交并推送修改
+      - name: Commit files
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "update fund data"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
           
       # # 生成静态文件
       # - name: Build
