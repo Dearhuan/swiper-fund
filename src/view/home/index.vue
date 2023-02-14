@@ -11,7 +11,7 @@
                 <div class="date">{{ item.date }}</div>
               </div>
               <div class="detail-rt flex">
-                <div class="time text-rt">{{ dateFormater('HH:mm', data[0].details[0].gztime) }}</div>
+                <div class="time text-rt">{{ dateFormater('HH:mm', item.details[0].gztime) }}</div>
               </div>
             </div>
           </div>
