@@ -38,18 +38,18 @@ jobs:
         with:
           github_token: ${{ secrets.FUND_TOKEN }}
           
-      # # 生成静态文件
-      # - name: Build
-      #   run: npm install && export NODE_OPTIONS=--max_old_space_size=8192 && npm run docs:build
+      # 生成静态文件
+      - name: Build
+        run: npm install && npm run build
 
-      # # 部署到 GitHub Pages
-      # - name: Deploy
-      #   # 使用别人写好的一个 action
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     # 这里的 ACCESS_TOKEN 名字需要和下文中的相对应
-      #     ACCESS_TOKEN: ${{ secrets.FUND_TOKEN }}
-      #     # 打包后的文件部署到哪个分支上
-      #     BRANCH: gh-pages
-      #     # 打包后的文件在哪里
-      #     FOLDER: docs/.vuepress/dist
+      # 部署到 GitHub Pages
+      - name: Deploy
+        # 使用别人写好的一个 action
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          # 这里的 ACCESS_TOKEN 名字需要和下文中的相对应
+          ACCESS_TOKEN: ${{ secrets.FUND_TOKEN }}
+          # 打包后的文件部署到哪个分支上
+          BRANCH: gh-pages
+          # 打包后的文件在哪里
+          FOLDER: dist
