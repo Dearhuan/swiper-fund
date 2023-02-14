@@ -49,7 +49,7 @@ const dateFormater = (formater, time) => {
 }
 
 const readDataList = (path) => {
-  const list = fs.readFileSync(path)
+  const list = JSON.parse(fs.readFileSync(path, 'utf-8'))
   return list
 }
 
