@@ -114,24 +114,24 @@ const getFundInfoTask = async () => {
 
     if (list.length > 0) {
       const isExist = list.some(item => {
-        return item.date == dateFormater('YYYY-MM-DD', arr[0].jzrq)
+        return item.date == dateFormater('YYYY-MM-DD', arr[0].gztime)
       })
       console.log({isExist})
       if (!isExist) {
         list.push({
-          date: dateFormater('YYYY-MM-DD', arr[0].jzrq),
+          date: dateFormater('YYYY-MM-DD', arr[0].gztime),
           details: arr
         })
       } else {
         list.forEach(item => {
-          if ((item.date == arr[0].jzrq) && (item.details[0].gztime != arr[0].gztime)) {
+          if ((item.date == dateFormater('YYYY-MM-DD', arr[0].gztime)) && (item.details[0].gztime != dateFormater('YYYY-MM-DD', arr[0].gztime))) {
             item.details = arr
           }
         })
       }
     } else {
       list.push({
-        date: arr[0] ? arr[0].jzrq : dateFormater('YYYY-MM-DD'),
+        date: arr[0] ? dateFormater('YYYY-MM-DD', arr[0].gztime) : dateFormater('YYYY-MM-DD'),
         details: arr
       })
     }

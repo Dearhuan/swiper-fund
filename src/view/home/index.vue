@@ -6,7 +6,7 @@
           <div class="box-item box-top" :style="{
             background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
           }">
-            <div class="date">{{ item.gztime }}</div>
+            <div class="date">{{ item.date }}</div>
           </div>
           <div class="box-item box-bottom" :style="{
             background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
@@ -17,7 +17,7 @@
                 <div class="type">{{ detail.name }}</div>
               </div>
               <div class="detail-rt">
-                <div class="money text-rt">{{ detail.gszzl }}</div>
+                <div class="money text-rt">{{ formatGszzl(detail.gszzl) }}</div>
               </div>
             </div>
           </div>
@@ -33,18 +33,13 @@ import data from '@/configs/data.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 
-// 获取随机16进制颜色
-const getRandomColor = () => {
-  let r = Math.floor(Math.random() * 256);
-  let g = Math.floor(Math.random() * 256);
-  let b = Math.floor(Math.random() * 256);
-  let color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
-  return color;
-}
-
 const getRandNum = (min: any, max: any) => {
   return parseInt(Math.random() * (max - min + 1) + min);
 };
+
+const formatGszzl = (gszzl: string) => {
+  return gszzl.indexOf('-') > -1 ? `${gszzl}%` : `+${gszzl}%`
+}
 
 const bgColors = [
   `linear-gradient(135deg, #5EFCE8 10%, #736EFE 100%)`,
