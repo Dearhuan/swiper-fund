@@ -12,6 +12,12 @@ const rootPath = path.resolve(__dirname, '../')
 
 const dataPath = rootPath + '/src/configs'
 
+
+console.log('__fileName:', __fileName)
+console.log('__dirname:', __dirname)
+console.log('rootPath:', rootPath)
+console.log('dataPath:', dataPath)
+
 const getFundInfo = (fundCode) => {
   return new Promise((resolve, reject) => {
     axios
@@ -131,7 +137,7 @@ const getFundInfoTask = async () => {
     }
 
     console.log(list)
-    writeDataList(dataPath, list)
+    // writeDataList(dataPath, list)
   } catch (error) {
     console.error(error);
   }
