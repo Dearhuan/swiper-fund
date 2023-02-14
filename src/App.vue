@@ -69,10 +69,10 @@ html {
 
         position: absolute;
         top: 0;
-        left: -500px;
+        // left: -500px;
         width: 100vw;
         height: 100vh;
-        transform: rotate(320deg);
+        // transform: rotate(320deg);
 
         .item {
           width: 2000px;
