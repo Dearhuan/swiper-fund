@@ -74,25 +74,25 @@ const getFundInfoTask = async () => {
     );
     arr.push(data2);
 
-    let res3 = await getFundInfo("161725");
+    let res3 = await getFundInfo("003096");
     let data3 = JSON.parse(
       res3.substring(res3.indexOf("(") + 1, res3.lastIndexOf(")"))
     );
     arr.push(data3);
 
-    let res4 = await getFundInfo("003096");
+    let res4 = await getFundInfo("161725");
     let data4 = JSON.parse(
       res4.substring(res4.indexOf("(") + 1, res4.lastIndexOf(")"))
     );
     arr.push(data4);
 
-    let res5 = await getFundInfo("001513");
+    let res5 = await getFundInfo("005827");
     let data5 = JSON.parse(
       res5.substring(res5.indexOf("(") + 1, res5.lastIndexOf(")"))
     );
     arr.push(data5);
 
-    let res6 = await getFundInfo("005827");
+    let res6 = await getFundInfo("001513");
     let data6 = JSON.parse(
       res6.substring(res6.indexOf("(") + 1, res6.lastIndexOf(")"))
     );
@@ -104,11 +104,23 @@ const getFundInfoTask = async () => {
     );
     arr.push(data7);
 
-    let res8 = await getFundInfo("001875");
+    let res8 = await getFundInfo("161028");
     let data8 = JSON.parse(
       res8.substring(res8.indexOf("(") + 1, res8.lastIndexOf(")"))
     );
     arr.push(data8);
+
+    let res9 = await getFundInfo("519674");
+    let data9 = JSON.parse(
+      res9.substring(res9.indexOf("(") + 1, res9.lastIndexOf(")"))
+    );
+    arr.push(data9);
+
+    let res10 = await getFundInfo("001875");
+    let data10 = JSON.parse(
+      res10.substring(res10.indexOf("(") + 1, res10.lastIndexOf(")"))
+    );
+    arr.push(data10);
     console.log(arr);
     let list = readDataList(dataPath)
 

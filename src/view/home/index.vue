@@ -6,7 +6,14 @@
           <div class="box-item box-top" :style="{
             background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
           }">
-            <div class="date">{{ item.date }}</div>
+            <div class="details flex">
+              <div class="detail-lt flex1">
+                <div class="date">{{ item.date }}</div>
+              </div>
+              <div class="detail-rt flex">
+                <div class="time text-rt">{{ dateFormater('HH:mm', data[0].details[0].gztime) }}</div>
+              </div>
+            </div>
           </div>
           <div class="box-item box-bottom" :style="{
             background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
@@ -16,7 +23,7 @@
                 <div class="code">{{ detail.fundcode }}</div>
                 <div class="type">{{ detail.name }}</div>
               </div>
-              <div class="detail-rt">
+              <div class="detail-rt flex">
                 <div class="money text-rt">{{ formatGszzl(detail.gszzl) }}</div>
               </div>
             </div>
@@ -32,6 +39,7 @@
 import data from '@/configs/data.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import { dateFormater } from '@/utils'
 
 const getRandNum = (min: any, max: any) => {
   return parseInt(Math.random() * (max - min + 1) + min);
@@ -72,6 +80,35 @@ const bgColors = [
     .swiper {
       height: 100vh;
 
+      @keyframes fadeIn-top {
+        0% {
+          transform: translateY(100vh);
+        }
+
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      @keyframes fadeIn-bottom {
+        0% {
+          transform: translateY(-100vh);
+        }
+
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .swiper-slide-active {
+        .box-top {
+          animation: fadeIn-top 2s;
+        }
+        .box-bottom {
+          animation: fadeIn-bottom 2s;
+        }
+      }
+
       .swiper-slide {
 
         .box-item {
@@ -81,14 +118,16 @@ const bgColors = [
           margin: 10px 0;
         }
 
+
+
         .box-top {
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
+          // border-bottom-left-radius: 0;
+          // border-bottom-right-radius: 0;
         }
 
         .box-bottom {
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
+          // border-top-left-radius: 0;
+          // border-top-right-radius: 0;
           max-height: 80vh;
           overflow: scroll;
 
@@ -97,6 +136,8 @@ const bgColors = [
 
             .detail-rt {
               width: 60px;
+              justify-content: flex-end;
+              align-items: center;
             }
           }
 

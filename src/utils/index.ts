@@ -1,6 +1,3 @@
-import { payTypes, incomeTypes, payIcons, incomeIcons } from '@/configs'
-import type { AnalysisPayAndIncomeItem } from '@/types'
-
 //格式化时间
 // dateFormater('YYYY-MM-DD HH:mm:ss')
 // dateFormater('YYYYMMDDHHmmss')
@@ -34,22 +31,6 @@ export const getWeekOfDate = (date: string) => {
   ]
   const d = new Date(date)
   return weekDay[d.getDay()]
-}
-
-// 类型中文
-export const transformType = (type: string, isPayout?: boolean) => {
-  let name = ''
-
-  name = (isPayout ? payTypes[type] : incomeTypes[type]) || '其他'
-  return name
-}
-
-// 类型图标
-export const transformIcon = (type: string, isPayout?: boolean) => {
-  let icon = ''
-
-  icon = (isPayout ? payIcons[type] : incomeIcons[type]) || 'shop'
-  return icon
 }
 
 // tooltip格式化日期金额
@@ -157,12 +138,4 @@ export const getSeasonByDate = (date: string) => {
 
 export const transformMoney = (money: number) => {
   return money.toFixed(2).replace(/\-/g, '')
-}
-
-export const transformMoneyPercent = (item: AnalysisPayAndIncomeItem) => {
-  return `${item.percent}% (${item.count}笔)`
-}
-
-export const getProgressStyle = (item: AnalysisPayAndIncomeItem) => {
-  return `width: ${item.percent}%;background:${item.money < 0 ? '#1989fa' : 'orange'};`
 }

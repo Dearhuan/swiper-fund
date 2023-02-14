@@ -13,7 +13,7 @@ const routes = [
     path: '/home',
     component: () => import('@/view/home/index.vue'),
     meta: {
-      title: '首页',
+      title: '',
       showTabBar: true
     }
   },
