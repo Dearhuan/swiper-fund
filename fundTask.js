@@ -18,6 +18,9 @@ console.log('__dirname:', __dirname)
 console.log('rootPath:', rootPath)
 console.log('dataPath:', dataPath)
 
+console.log('now:', Date.now())
+console.log('week:', new Date(Date.now()).getDay())
+
 const getFundInfo = (fundCode) => {
   return new Promise((resolve, reject) => {
     axios
