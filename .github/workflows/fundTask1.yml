@@ -1,4 +1,4 @@
-name: fund task
+name: fundTask1
 on:
   workflow_dispatch:
   schedule:
