@@ -118,7 +118,7 @@ const getFundInfoTask = async () => {
       })
       if (!isExist) {
         list.push({
-          date: dateFormater('YYYY-MM-DD'),
+          date: dateFormater('YYYY-MM-DD', arr[0].jzrq),
           details: arr
         })
       } else {
