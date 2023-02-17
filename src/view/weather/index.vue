@@ -41,8 +41,8 @@
               </div>
               <div>
                 <div style="margin-bottom: 10px;">三天天气：</div>
-                <div class="flex" v-for="(day) in info.threeDaysData">
-                  <div class="font-bold flex">
+                <div class="flex font-small" v-for="(day) in info.threeDaysData">
+                  <div class="font-bold flex weather-item">
                     <span class="desc">{{ day.Day }}</span>
                     <img class="icon" :src="day.WeatherImgUrl" @error.once="errorImage" alt="">
                     <span class="desc">{{ day.WeatherText }}</span>
@@ -149,6 +149,10 @@ const errorImage = (event: any) => {
 
             .icon {
               width: 24px;
+            }
+
+            .weather-item {
+              align-items: center;
             }
           }
 
