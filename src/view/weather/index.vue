@@ -20,24 +20,24 @@
           }">
             <div class="details padding-b-20" v-for="(info) in item.list">
               <div class="flex padding-b-10">
-                <div>城市：</div>
-                <div class="font-bold">{{ info.addressText }}</div>
+                <div class="flex">城市：<img class="icon" src="../../assets/images/city.png" alt=""></div>
+                <div class="flex font-bold">{{ info.addressText }}</div>
               </div>
               <div class="flex padding-b-10">
-                <div>天气：</div>
-                <div class="font-bold">{{ `${info.nowInfo.Temp}℃${info.nowInfo.WeatherText}` }}</div>
+                <div class="flex">天气：<img class="icon" src="../../assets/images/w1.png" alt=""/></div>
+                <div class="flex font-bold">{{ `${info.nowInfo.Temp}℃${info.nowInfo.WeatherText}` }}</div>
               </div>
               <div class="flex padding-b-10">
-                <div>湿度：</div>
-                <div class="font-bold">{{ info.nowInfo.Humidity }}</div>
+                <div class="flex">湿度：<img class="icon" src="../../assets/images/wet.png" alt=""/></div>
+                <div class="flex font-bold">{{ info.nowInfo.Humidity }}</div>
               </div>
               <div class="flex padding-b-10">
-                <div>风向：</div>
-                <div class="font-bold">{{ info.nowInfo.Wind }}</div>
+                <div class="flex">风向：<img class="icon" src="../../assets/images/wind.png" alt=""/></div>
+                <div class="flex font-bold">{{ info.nowInfo.Wind }}</div>
               </div>
               <div class="flex padding-b-10">
-                <div>提示：</div>
-                <div class="font-bold">{{ info.weatherTip }}</div>
+                <div class="flex">提示：<img class="icon" src="../../assets/images/tips.png" alt=""/></div>
+                <div class="flex font-bold">{{ info.weatherTip }}</div>
               </div>
               <div>
                 <div style="margin-bottom: 10px;">三天天气：</div>
