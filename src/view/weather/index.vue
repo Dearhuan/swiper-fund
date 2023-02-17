@@ -40,9 +40,15 @@
                 <div class="font-bold">{{ info.weatherTip }}</div>
               </div>
               <div>
-                <div>三天天气：</div>
+                <div style="margin-bottom: 10px;">三天天气：</div>
                 <div class="flex" v-for="(day) in info.threeDaysData">
-                  <div class="font-bold">{{ `${day.Day} ${day.WeatherText} ${day.Temperature} ${day.Pollution}` }}</div>
+                  <div class="font-bold flex">
+                    <span class="desc">{{ day.Day }}</span>
+                    <img class="icon" :src="day.WeatherImgUrl" @error.once="errorImage" alt="">
+                    <span class="desc">{{ day.WeatherText }}</span>
+                    <span class="desc">{{ day.Temperature }}</span>
+                    <span class="desc">{{ day.Pollution }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -59,10 +65,15 @@ import data from '@/configs/weather.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { bgColors } from '@/configs'
+import defaultImg from '@/assets/images/w2.png'
 
 const getRandNum = (min: any, max: any) => {
   return parseInt(Math.random() * (max - min + 1) + min);
 };
+
+const errorImage = (event: any) => {
+  event.target.src = defaultImg
+}
 </script>
 
 <style lang="scss" scoped>
@@ -127,6 +138,17 @@ const getRandNum = (min: any, max: any) => {
               .red {
                 color: #f50028;
               }
+            }
+
+            .desc {
+              padding: 0 10px;
+            }
+            .desc:nth-child(1) {
+              padding-left: 0;
+            }
+
+            .icon {
+              width: 24px;
             }
           }
 

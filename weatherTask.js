@@ -138,6 +138,7 @@ const makeUpInfo = async () => {
   const weather_ganzhou = await getWeather("jiangxi", "ganzhou");
   const weather_beijing = await getWeather("beijing", "beijing");
   const weather_shanghai = await getWeather("shanghai", "shanghai");
+  const weather_dali = await getWeather("yunnan", "dali");
   const weather_sanya = await getWeather("hainan", "sanya");
 
   const list = readDataList(dataPath)
@@ -153,6 +154,7 @@ const makeUpInfo = async () => {
     weather_ganzhou,
     weather_beijing,
     weather_shanghai,
+    weather_dali,
     weather_sanya
   }
 
