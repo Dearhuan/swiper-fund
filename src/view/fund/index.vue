@@ -145,6 +145,9 @@ watch([activeIndex], () => {
             margin-bottom: 0;
           }
         }
+        .box-top {
+          margin-bottom: 20px;
+        }
       }
     }
   }

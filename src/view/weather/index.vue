@@ -134,6 +134,10 @@ const getRandNum = (min: any, max: any) => {
             margin-bottom: 0;
           }
         }
+
+        .box-top {
+          margin-bottom: 20px;
+        }
       }
     }
   }

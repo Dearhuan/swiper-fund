@@ -133,8 +133,12 @@ const getNowSeconds = () => {
 // 数据组装&写入JSON
 const makeUpInfo = async () => {
   const date = dateFormater('YYYY-MM-DD', getNowSeconds())
-  const weather_gz = await getWeather("guangdong", "guangzhou");
-  const weather_hn = await getWeather("hunan", "hengnan-county");
+  const weather_guangzhou = await getWeather("guangdong", "guangzhou");
+  const weather_hengyang = await getWeather("hunan", "hengyang");
+  const weather_ganzhou = await getWeather("jiangxi", "ganzhou");
+  const weather_beijing = await getWeather("beijing", "beijing");
+  const weather_shanghai = await getWeather("shanghai", "shanghai");
+  const weather_sanya = await getWeather("hainan", "sanya");
 
   const list = readDataList(dataPath)
 
@@ -143,13 +147,39 @@ const makeUpInfo = async () => {
     list: []
   }
 
-  if (weather_gz) {
-    obj.list.push(weather_gz.moji)
+  const weathers = {
+    weather_guangzhou,
+    weather_hengyang,
+    weather_ganzhou,
+    weather_beijing,
+    weather_shanghai,
+    weather_sanya
   }
-  if (weather_hn) {
-    obj.list.push(weather_hn.moji)
+
+  for (const k in weathers) {
+    if (weathers[k]) {
+      obj.list.push(weathers[k].moji)
+    }
   }
-  list.push(obj)
+
+  if (list.length > 0) {
+    const isExist = list.some(item => {
+      return item.date == date
+    })
+    console.log({isExist})
+    if (!isExist) {
+      list.push(obj)
+    } else {
+      list.forEach(item => {
+        if (item.date == date) {
+          item.list = obj.list
+        }
+      })
+    }
+  } else {
+    list.push(obj)
+  }
+
   console.log(list)
   writeDataList(dataPath, list)
 }
