@@ -4,7 +4,7 @@
       <swiper loop>
         <swiper-slide v-for="(item, i) in data.reverse()">
           <div class="box-item box-top" :style="{
-            background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
+            background: bgColors[data.length - i] ? bgColors[data.length - i] : bgColors[getRandNum(0, bgColors.length)]
           }">
             <div class="details flex">
               <div class="detail-lt flex1">
@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="box-item box-bottom" :style="{
-            background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
+            background: bgColors[data.length - i] ? bgColors[data.length - i] : bgColors[getRandNum(0, bgColors.length)]
           }">
             <div class="details padding-b-20" v-for="(info) in item.list">
               <div class="flex padding-b-10">
