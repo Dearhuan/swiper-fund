@@ -1,140 +1,61 @@
 <template>
-  <div class="home">
-    <div class="box">
-      <swiper loop @slide-change="onSwiper">
-        <swiper-slide v-for="(item, i) in data.reverse()">
-          <div class="box-item box-top" :style="{
-            background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
-          }">
-            <div class="details flex">
-              <div class="detail-lt flex1">
-                <div class="date">{{ item.date }}</div>
-              </div>
-              <div class="detail-rt flex">
-                <div class="time text-rt">{{ dateFormater('HH:mm', item.details[0].gztime) }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="box-item box-bottom" :style="{
-            background: bgColors[i] ? bgColors[i] : bgColors[getRandNum(0, bgColors.length)]
-          }">
-            <div class="details flex" v-for="(detail) in item.details">
-              <div class="detail-lt flex1">
-                <div class="code">{{ detail.fundcode }}</div>
-                <div class="type">{{ detail.name }}</div>
-              </div>
-              <div class="detail-rt flex">
-                <div class="money text-rt" :class="formatGszzl(detail.gszzl).indexOf('+') > -1 ? 'red' : ''">{{ formatGszzl(detail.gszzl) }}</div>
-              </div>
-            </div>
-          </div>
-
-        </swiper-slide>
-      </swiper>
+  <div class="home flex flex-c">
+    <div class="flex box flex-c font-bold">
+      <div class="btn fund" @click="router.push('/fund')">FUND</div>
+      <div class="btn weather" @click="router.push('/weather')">WEATHER</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { watch, ref } from 'vue'
-import data from '@/configs/data.json'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
-import { dateFormater } from '@/utils'
-import { bgColors } from '@/configs'
+import { useRouter } from 'vue-router'
 
-const getRandNum = (min: any, max: any) => {
-  return parseInt(Math.random() * (max - min + 1) + min);
-};
-
-const formatGszzl = (gszzl: string) => {
-  return gszzl.indexOf('-') > -1 ? `${gszzl}%` : `+${gszzl}%`
-}
-
-let curSwiper = null
-
-const activeIndex = ref(0)
-
-const onSwiper = (swiper: any) => {
-  curSwiper = swiper
-  activeIndex.value = curSwiper.activeIndex
-}
-
-watch([activeIndex], () => {
-  document.title = activeIndex.value + ''
-})
-
+const router = useRouter()
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .home {
+  @keyframes fadeIn-lt {
+    from {
+      transform: translate(-50vw);
+    }
+
+    to {
+      transform: translate(0);
+    }
+  }
+
+  @keyframes fadeIn-rt {
+    from {
+      transform: translate(50vw);
+    }
+
+    to {
+      transform: translate(0);
+    }
+  }
+
+  height: 100vh;
+  background: linear-gradient(135deg, rgb(146, 255, 192) 10%, rgb(0, 38, 97) 100%);
+
   .box {
-    padding: 10px 20px;
+    flex-direction: column;
 
-    .swiper {
-      height: 100vh;
+    .btn {
+      color: #fff;
+      padding: 20px 30px;
+      border-radius: 30px;
+    }
 
-      @keyframes fadeIn-top {
-        0% {
-          transform: translateY(100vh);
-        }
+    .fund {
+      margin-bottom: 20px;
+      animation: fadeIn-lt 2s;
+      background: linear-gradient(135deg, rgb(255 198 0) 10%, rgb(255 8 107) 100%);
+    }
 
-        100% {
-          transform: translateY(0px);
-        }
-      }
-
-      @keyframes fadeIn-bottom {
-        0% {
-          transform: translateY(-100vh);
-        }
-
-        100% {
-          transform: translateY(0px);
-        }
-      }
-
-      .swiper-slide-active {
-        .box-top {
-          animation: fadeIn-top 2s;
-        }
-
-        .box-bottom {
-          animation: fadeIn-bottom 2s;
-        }
-      }
-
-      .swiper-slide {
-
-        .box-item {
-          color: #fff;
-          padding: 20px;
-          border-radius: 15px;
-          margin: 10px 0;
-        }
-
-        .box-bottom {
-          max-height: 80vh;
-          overflow: scroll;
-
-          .details {
-            margin-bottom: 20px;
-
-            .detail-rt {
-              width: 60px;
-              justify-content: flex-end;
-              align-items: center;
-              .red {
-                color: #f50028;
-              }
-            }
-          }
-
-          .details:last-child {
-            margin-bottom: 0;
-          }
-        }
-      }
+    .weather {
+      animation: fadeIn-rt 2s;
+      background: linear-gradient(135deg, rgb(171, 220, 255) 10%, rgb(3, 150, 255) 100%);
     }
   }
 }

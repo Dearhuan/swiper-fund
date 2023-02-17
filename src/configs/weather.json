@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2023-02-16",
+    "list": [
+      {
+        "addressText": "中国-广东省-广州市",
+        "weatherTip": "略微偏凉，还是蛮舒适的。",
+        "nowInfo": {
+          "Temp": "18",
+          "WeatherText": "晴",
+          "FreshText": "今天17:36更新",
+          "Humidity": "湿度 47%",
+          "Wind": "东北风1级"
+        },
+        "threeDaysData": [
+          {
+            "Day": "今天",
+            "WeatherText": "晴",
+            "Temperature": "9° / 20°",
+            "Pollution": "46 优"
+          },
+          {
+            "Day": "明天",
+            "WeatherText": "晴",
+            "Temperature": "12° / 21°",
+            "Pollution": "85 良"
+          },
+          {
+            "Day": "后天",
+            "WeatherText": "多云",
+            "Temperature": "15° / 23°",
+            "Pollution": "90 良"
+          }
+        ]
+      }
+    ]
+  }
+]

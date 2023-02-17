@@ -14,6 +14,23 @@ const routes = [
     component: () => import('@/view/home/index.vue'),
     meta: {
       title: '',
+    }
+  },
+  {
+    name: 'fund',
+    path: '/fund',
+    component: () => import('@/view/fund/index.vue'),
+    meta: {
+      title: '',
+      showTabBar: true
+    }
+  },
+  {
+    name: 'weather',
+    path: '/weather',
+    component: () => import('@/view/weather/index.vue'),
+    meta: {
+      title: '天气',
       showTabBar: true
     }
   },
