@@ -1,8 +1,9 @@
 <template>
   <div class="home flex flex-c">
     <div class="flex box flex-c font-bold">
-      <div class="btn fund" @click="router.push('/fund')">FUND</div>
-      <div class="btn weather" @click="router.push('/weather')">WEATHER</div>
+      <div class="btn fund" @click="router.push('/fund')">Fund</div>
+      <div class="btn weather" @click="router.push('/weather')">Weather</div>
+      <a class="btn bill" href="https://dearhuan.gitee.io/vip/#/home">Bill</a>
     </div>
   </div>
 </template>
@@ -43,12 +44,16 @@ const router = useRouter()
 
     .btn {
       color: #fff;
-      padding: 20px 30px;
+      padding: 20px 40px;
       border-radius: 30px;
+      margin-bottom: 20px;
+    }
+
+    .btn:last-child{
+      margin-bottom: 0;
     }
 
     .fund {
-      margin-bottom: 20px;
       animation: fadeIn-lt 2s;
       background: linear-gradient(135deg, rgb(255 198 0) 10%, rgb(255 8 107) 100%);
     }
@@ -56,6 +61,12 @@ const router = useRouter()
     .weather {
       animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, rgb(171, 220, 255) 10%, rgb(3, 150, 255) 100%);
+    }
+
+    .bill {
+      text-decoration: none;
+      animation: fadeIn-lt 2s;
+      background: linear-gradient(135deg, #BB4E75 30%, #BC78EC 100%);
     }
   }
 }
