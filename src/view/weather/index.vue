@@ -3,7 +3,7 @@
     <div class="box">
       <swiper loop>
         <swiper-slide v-for="(item, i) in data.reverse()">
-          <div class="box-item box-top" :style="{
+          <div @click="showWeatherChart = true" class="box-item box-top" :style="{
             background: bgColors[data.length - i] ? bgColors[data.length - i] : bgColors[getRandNum(0, bgColors.length)]
           }">
             <div class="details flex">
@@ -189,10 +189,21 @@
         </swiper-slide>
       </swiper>
     </div>
+
+    <div v-show="showWeatherChart" class="container-chart flex flex-c flex-column">
+      <div ref="containerChart" style="width: 90vw;height: 400px;"></div>
+      <svg @click="showWeatherChart = false" t="1677463626547" class="icon" viewBox="0 0 1024 1024" version="1.1"
+        xmlns="http://www.w3.org/2000/svg" p-id="8372" width="32" height="32">
+        <path
+          d="M510.957251 351.97026 1021.893013 0 669.922752 510.935762 1021.893013 1021.8705 510.957251 669.901263 0.021489 1021.8705 351.99175 510.935762 0.021489 0Z"
+          fill="#4C4C4C" p-id="8373"></path>
+      </svg>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, inject, onMounted } from 'vue'
 import data from '@/configs/weather.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
@@ -206,6 +217,60 @@ const getRandNum = (min: any, max: any) => {
 const errorImage = (event: any) => {
   event.target.src = defaultImg
 }
+
+const showWeatherChart = ref(false)
+const echarts: any = inject('$echarts')
+
+const containerChart = ref(null)
+let containerCharts: any
+
+onMounted(() => {
+  containerCharts = echarts.init(containerChart.value)
+
+  const arr = data.reverse().slice(0, 5)
+  const option = {
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: arr[0].list.map(item => {
+        return item.addressText.replace('中国-', '')
+      })
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: arr.map(item => {
+        return item.date
+      })
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: arr[0].list.map(item => {
+      return {
+        name: item.addressText.replace('中国-', ''),
+        type: 'line',
+        data: arr.map(a => {
+          return a.list.filter(x => {
+            return x.addressText.indexOf(item.addressText) > -1
+          })[0].nowInfo.Temp
+        })
+      }
+    })
+  }
+  containerCharts.setOption(option)
+
+  window.onresize = () => {
+    containerCharts.resize()
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -300,6 +365,21 @@ const errorImage = (event: any) => {
           margin-bottom: 20px;
         }
       }
+    }
+  }
+
+  .container-chart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    opacity: 0.8;
+
+    .icon {
+      margin-top: 30px;
     }
   }
 }
