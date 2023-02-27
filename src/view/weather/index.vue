@@ -274,6 +274,16 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@keyframes fadeIn-bottom {
+  0% {
+    transform: translateY(-100vh);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .home {
   background: linear-gradient(135deg, #2AA0B9 10%, #4D4F78 100%);
 
@@ -377,6 +387,7 @@ onMounted(() => {
     height: 100vh;
     background: #fff;
     opacity: 0.8;
+    animation: fadeIn-bottom 0.5s;
 
     .icon {
       margin-top: 30px;
