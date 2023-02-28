@@ -203,12 +203,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, onMounted } from 'vue'
+import { ref, Ref, onMounted } from 'vue'
 import data from '@/configs/weather.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { bgColors } from '@/configs'
 import defaultImg from '@/assets/images/w2.png'
+import { useEcharts } from '@/utils/echarts/useEcharts'
+import { RenderType, ThemeType } from '@/utils/echarts/echarts-type'
 
 const getRandNum = (min: any, max: any) => {
   return parseInt(Math.random() * (max - min + 1) + min);
@@ -219,14 +221,14 @@ const errorImage = (event: any) => {
 }
 
 const showWeatherChart = ref(false)
-const echarts: any = inject('$echarts')
 
-const containerChart = ref(null)
-let containerCharts: any
+const containerChart = ref<HTMLDivElement | null>(null)
+const { setOption } = useEcharts(
+  containerChart as Ref<HTMLDivElement>, 
+    RenderType['SVGRenderer'] , 
+    ThemeType['Light'])
 
 onMounted(() => {
-  containerCharts = echarts.init(containerChart.value)
-
   const arr = data.reverse().slice(0, 5)
   const option = {
     tooltip: {
@@ -265,11 +267,8 @@ onMounted(() => {
       }
     })
   }
-  containerCharts.setOption(option)
 
-  window.onresize = () => {
-    containerCharts.resize()
-  }
+  setOption(option)
 })
 </script>
 
