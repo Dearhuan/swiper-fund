@@ -2,7 +2,7 @@
   <div class="home">
     <div class="box">
       <swiper loop>
-        <swiper-slide v-for="(item, i) in data.reverse()">
+        <swiper-slide v-for="(item, i) in data">
           <div @click="showWeatherChart = true" class="box-item box-top" :style="{
             background: bgColors[data.length - i] ? bgColors[data.length - i] : bgColors[getRandNum(0, bgColors.length)]
           }">
@@ -220,6 +220,8 @@ const errorImage = (event: any) => {
   event.target.src = defaultImg
 }
 
+const list = data
+
 const showWeatherChart = ref(false)
 
 const containerChart = ref<HTMLDivElement | null>(null)
@@ -229,7 +231,7 @@ const { setOption } = useEcharts(
     ThemeType['Light'])
 
 onMounted(() => {
-  const arr = data.reverse().slice(0, 5)
+  const arr = list.reverse().slice(0, 5)
   const option = {
     tooltip: {
       trigger: 'axis'
