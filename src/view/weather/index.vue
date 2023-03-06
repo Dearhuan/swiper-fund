@@ -174,7 +174,7 @@
                   </svg>
                 </div>
                 <div class="flex font-small" v-for="(day) in info.threeDaysData">
-                  <div class="font-bold flex weather-item">
+                  <div class="font-bold flex weather-item gradient-text">
                     <span class="desc">{{ day.Day }}</span>
                     <img class="icon" :src="day.WeatherImgUrl" @error.once="errorImage" alt="">
                     <span class="desc">{{ day.WeatherText }}</span>
