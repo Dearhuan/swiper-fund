@@ -1,11 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import echarts from './utils/echarts'
+import i18n from './locales'
 
 const app = createApp(App)
 
-app.use(router)
-app.mount('#app')
-
-app.provide('$echarts', echarts)
+app.use(router).use(i18n).mount('#app')
