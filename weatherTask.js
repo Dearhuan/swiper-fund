@@ -153,7 +153,7 @@ const makeUpInfo = async (cityList) => {
 
   // for...of  按序执行异步任务
   for (const city of cityList) {
-    const res = await getWeather(cityList[city].province, cityList[city].city)
+    const res = await getWeather(city.province, city.city)
     dataList.push(res)
   }
 
