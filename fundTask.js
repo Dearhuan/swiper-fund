@@ -12,6 +12,19 @@ const rootPath = path.resolve(__dirname, './')
 
 const dataPath = rootPath + '/src/configs/data.json'
 
+const fundcodeList = [
+  '005918',
+  '161726',
+  '003096',
+  '161725',
+  '005827',
+  '001513',
+  '003984',
+  '161028',
+  '519674',
+  '001875',
+]
+
 console.log('now:', Date.now())
 console.log('week:', new Date(Date.now()).getDay())
 
@@ -54,70 +67,17 @@ const writeDataList = (path, data) => {
   fs.writeFileSync(path, JSON.stringify(data))
 }
 
-const getFundInfoTask = async () => {
+const getFundInfoTask = async (fundcodeList) => {
   try {
     console.log("启动任务:" + new Date());
     let arr = [];
 
-    let res1 = await getFundInfo("005918");
-    let data1 = JSON.parse(
-      res1.substring(res1.indexOf("(") + 1, res1.lastIndexOf(")"))
-    );
-    arr.push(data1);
+    for (const code of fundcodeList) {
+      const res = await getFundInfo(code)
+      const data = JSON.parse(res.substring(res.indexOf('(') + 1, res.lastIndexOf(")")))
+      arr.push(data)
+    }
 
-    let res2 = await getFundInfo("161726");
-    let data2 = JSON.parse(
-      res2.substring(res2.indexOf("(") + 1, res2.lastIndexOf(")"))
-    );
-    arr.push(data2);
-
-    let res3 = await getFundInfo("003096");
-    let data3 = JSON.parse(
-      res3.substring(res3.indexOf("(") + 1, res3.lastIndexOf(")"))
-    );
-    arr.push(data3);
-
-    let res4 = await getFundInfo("161725");
-    let data4 = JSON.parse(
-      res4.substring(res4.indexOf("(") + 1, res4.lastIndexOf(")"))
-    );
-    arr.push(data4);
-
-    let res5 = await getFundInfo("005827");
-    let data5 = JSON.parse(
-      res5.substring(res5.indexOf("(") + 1, res5.lastIndexOf(")"))
-    );
-    arr.push(data5);
-
-    let res6 = await getFundInfo("001513");
-    let data6 = JSON.parse(
-      res6.substring(res6.indexOf("(") + 1, res6.lastIndexOf(")"))
-    );
-    arr.push(data6);
-
-    let res7 = await getFundInfo("003984");
-    let data7 = JSON.parse(
-      res7.substring(res7.indexOf("(") + 1, res7.lastIndexOf(")"))
-    );
-    arr.push(data7);
-
-    let res8 = await getFundInfo("161028");
-    let data8 = JSON.parse(
-      res8.substring(res8.indexOf("(") + 1, res8.lastIndexOf(")"))
-    );
-    arr.push(data8);
-
-    let res9 = await getFundInfo("519674");
-    let data9 = JSON.parse(
-      res9.substring(res9.indexOf("(") + 1, res9.lastIndexOf(")"))
-    );
-    arr.push(data9);
-
-    let res10 = await getFundInfo("001875");
-    let data10 = JSON.parse(
-      res10.substring(res10.indexOf("(") + 1, res10.lastIndexOf(")"))
-    );
-    arr.push(data10);
     console.log(arr);
     let list = readDataList(dataPath)
 
@@ -150,4 +110,4 @@ const getFundInfoTask = async () => {
   }
 };
 
-getFundInfoTask()
+getFundInfoTask(fundcodeList)
