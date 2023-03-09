@@ -100,18 +100,9 @@ const getWeather = async (city, location) => {
       Temperature: $(SingleDay[2])
         .text()
         .replace(/(^\s*)|(\s*$)/g, ""),
-      WindDirection: $(SingleDay[3])
-        .find("em")
-        .text()
-        .replace(/(^\s*)|(\s*$)/g, ""),
-      WindLevel: $(SingleDay[3])
-        .find("b")
-        .text()
-        .replace(/(^\s*)|(\s*$)/g, ""),
       Pollution: $(SingleDay[4])
         .text()
-        .replace(/(^\s*)|(\s*$)/g, ""),
-      PollutionLevel: $(SingleDay[4]).find("strong").attr("class"),
+        .replace(/(^\s*)|(\s*$)/g, "")
     });
   });
 
