@@ -11,6 +11,37 @@ const __dirname = path.dirname(__fileName)
 const rootPath = path.resolve(__dirname, './')
 const dataPath = rootPath + '/src/configs/weather.json'
 
+const cityList = [
+  {
+    province: 'guangdong',
+    city: 'guangzhou'
+  },
+  {
+    province: 'hunan',
+    city: 'hengyang'
+  },
+  {
+    province: 'jiangxi',
+    city: 'ganzhou'
+  },
+  {
+    province: 'beijing',
+    city: 'beijing'
+  },
+  {
+    province: 'shanghai',
+    city: 'shanghai'
+  },
+  {
+    province: 'yunnan',
+    city: 'dali'
+  },
+  {
+    province: 'hainan',
+    city: 'sanya'
+  }
+]
+
 console.log('now:', Date.now())
 console.log('week:', new Date(Date.now()).getDay())
 
@@ -102,12 +133,10 @@ const getWeather = async (city, location) => {
   });
 
   return {
-    moji: {
-      addressText,
-      weatherTip,
-      nowInfo,
-      threeDaysData,
-    },
+    addressText,
+    weatherTip,
+    nowInfo,
+    threeDaysData,
   };
 };
 
@@ -117,15 +146,16 @@ const getNowSeconds = () => {
 }
 
 // 数据组装&写入JSON
-const makeUpInfo = async () => {
+const makeUpInfo = async (cityList) => {
   const date = dateFormater('YYYY-MM-DD', getNowSeconds())
-  const weather_guangzhou = await getWeather("guangdong", "guangzhou");
-  const weather_hengyang = await getWeather("hunan", "hengyang");
-  const weather_ganzhou = await getWeather("jiangxi", "ganzhou");
-  const weather_beijing = await getWeather("beijing", "beijing");
-  const weather_shanghai = await getWeather("shanghai", "shanghai");
-  const weather_dali = await getWeather("yunnan", "dali");
-  const weather_sanya = await getWeather("hainan", "sanya");
+
+  const dataList = []
+
+  // for...of  按序执行异步任务
+  for (const city of cityList) {
+    const res = await getWeather(cityList[city].province, cityList[city].city)
+    dataList.push(res)
+  }
 
   const list = readDataList(dataPath)
 
@@ -133,22 +163,7 @@ const makeUpInfo = async () => {
     date,
     list: []
   }
-
-  const weathers = {
-    weather_guangzhou,
-    weather_hengyang,
-    weather_ganzhou,
-    weather_beijing,
-    weather_shanghai,
-    weather_dali,
-    weather_sanya
-  }
-
-  for (const k in weathers) {
-    if (weathers[k]) {
-      obj.list.push(weathers[k].moji)
-    }
-  }
+  obj.list = dataList
 
   if (list.length > 0) {
     const isExist = list.some(item => {
@@ -170,4 +185,4 @@ const makeUpInfo = async () => {
   writeDataList(dataPath, list)
 }
 
-makeUpInfo()
+makeUpInfo(cityList)
