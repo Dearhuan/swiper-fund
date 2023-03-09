@@ -12,12 +12,6 @@ const rootPath = path.resolve(__dirname, './')
 
 const dataPath = rootPath + '/src/configs/data.json'
 
-
-console.log('__fileName:', __fileName)
-console.log('__dirname:', __dirname)
-console.log('rootPath:', rootPath)
-console.log('dataPath:', dataPath)
-
 console.log('now:', Date.now())
 console.log('week:', new Date(Date.now()).getDay())
 
@@ -131,7 +125,6 @@ const getFundInfoTask = async () => {
       const isExist = list.some(item => {
         return item.date == dateFormater('YYYY-MM-DD', arr[0].gztime)
       })
-      console.log({isExist})
       if (!isExist) {
         list.push({
           date: dateFormater('YYYY-MM-DD', arr[0].gztime),
@@ -151,7 +144,6 @@ const getFundInfoTask = async () => {
       })
     }
 
-    console.log(list)
     writeDataList(dataPath, list)
   } catch (error) {
     console.error(error);

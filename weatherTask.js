@@ -11,11 +11,6 @@ const __dirname = path.dirname(__fileName)
 const rootPath = path.resolve(__dirname, './')
 const dataPath = rootPath + '/src/configs/weather.json'
 
-console.log('__fileName:', __fileName)
-console.log('__dirname:', __dirname)
-console.log('rootPath:', rootPath)
-console.log('dataPath:', dataPath)
-
 console.log('now:', Date.now())
 console.log('week:', new Date(Date.now()).getDay())
 
@@ -159,7 +154,6 @@ const makeUpInfo = async () => {
     const isExist = list.some(item => {
       return item.date == date
     })
-    console.log({isExist})
     if (!isExist) {
       list.push(obj)
     } else {
@@ -173,7 +167,6 @@ const makeUpInfo = async () => {
     list.push(obj)
   }
 
-  console.log(list)
   writeDataList(dataPath, list)
 }
 
