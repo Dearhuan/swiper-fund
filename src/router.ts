@@ -34,6 +34,11 @@ const routes = [
       showTabBar: true
     }
   },
+  {
+    name: 'amap',
+    path: '/amap',
+    component: () => import('@/components/aMap/index.vue')
+  }
 ]
 
 const router = createRouter({

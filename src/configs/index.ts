@@ -60,3 +60,36 @@ export const bgColors = [
   "linear-gradient(135deg, rgb(255, 207, 113) 10%, rgb(35, 118, 221) 100%)",
   "linear-gradient(135deg, rgb(255, 150, 249) 10%, rgb(195, 43, 172) 100%)"
 ]
+
+export const AMapKey = '00e335f384375d099d9ef1124b3bf770'
+
+export const cityLocation = [
+  {
+    name: '广州',
+    lnglat: [113.5107, 23.2196]
+  },
+  {
+    name: '衡阳',
+    lnglat: [112.4121, 26.7902]
+  },
+  {
+    name: '赣州',
+    lnglat: [115.2795, 25.8124]
+  },
+  {
+    name: '北京',
+    lnglat: [116.4551, 40.2539]
+  },
+  {
+    name: '上海',
+    lnglat: [121.4648, 31.2891]
+  },
+  {
+    name: '大理',
+    lnglat: [99.9536, 25.6805]
+  },
+  {
+    name: '三亚',
+    lnglat: [109.3716, 18.3698]
+  },
+]
