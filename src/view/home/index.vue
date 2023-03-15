@@ -1,5 +1,8 @@
 <template>
-  <div class="home flex flex-c">
+  <div id="stroke" v-show="isShowStroke">
+    <div ref="stroke"></div>
+  </div>
+  <div class="home flex flex-c" v-show="!isShowStroke">
     <div class="flex box flex-c font-bold">
       <div class="btn fund" @click="router.push('/fund')">{{ $t('home.Fund') }}</div>
       <div class="btn weather" @click="router.push('/weather')">{{ $t('home.Weather') }}</div>
@@ -30,9 +33,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, Ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useEcharts } from '@/utils/echarts/useEcharts';
+import { RenderType, ThemeType } from '@/utils/echarts/echarts-type';
+import { dateFormater } from '@/utils';
+
+const isShowStroke = ref(true)
+const stroke = ref<HTMLElement | null>(null)
+const { setOption } = useEcharts(
+  stroke as Ref<HTMLElement>,
+  RenderType['CanvasRenderer'],
+  ThemeType['Light']
+)
 
 const langObj = {
   'zh': '简体中文',
@@ -56,9 +70,73 @@ const change = (type: string) => {
   selectedLangTitle.value = langObj[type]
   isShowLangBtns.value = false
 }
+
+onMounted(() => {
+  const option = {
+    graphic: {
+      elements: [
+        {
+          type: 'text',
+          left: 'center',
+          top: 'center',
+          style: {
+            text: dateFormater('YYYY-MM-DD HH:mm'),
+            fontSize: 30,
+            fontWeight: 'bold',
+            lineDash: [0, 200],
+            lineDashOffset: 0,
+            fill: 'transparent',
+            stroke: '#000',
+            lineWidth: 1
+          },
+          keyframeAnimation: {
+            duration: 3000,
+            loop: false,
+            keyframes: [
+              {
+                percent: 0.7,
+                style: {
+                  fill: 'transparent',
+                  lineDashOffset: 200,
+                  lineDash: [200, 0]
+                }
+              },
+              {
+                // Stop for a while.
+                percent: 0.8,
+                style: {
+                  fill: 'transparent'
+                }
+              },
+              {
+                percent: 1,
+                style: {
+                  fill: 'black'
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+  setOption(option)
+  setTimeout(() => {
+    isShowStroke.value = false
+  }, 3000);
+})
 </script>
 
 <style scoped lang="scss">
+#stroke {
+  width: 100vw;
+  height: 100vh;
+
+  div {
+    height: inherit;
+  }
+}
+
 .home {
   position: relative;
 
