@@ -255,7 +255,7 @@ onMounted(() => {
       trigger: 'axis'
     },
     legend: {
-      data: arr[0].list.map(item => {
+      data: arr[0].list.reverse().map(item => {
         return item.addressText.replace('中国-', '')
       })
     },
@@ -268,18 +268,18 @@ onMounted(() => {
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: arr.map(item => {
+      data: arr.reverse().map(item => {
         return item.date
       })
     },
     yAxis: {
       type: 'value'
     },
-    series: arr[0].list.map(item => {
+    series: arr[0].list.reverse().map(item => {
       return {
         name: item.addressText.replace('中国-', ''),
         type: 'line',
-        data: arr.map(a => {
+        data: arr.reverse().map(a => {
           return a.list.filter(x => {
             return x.addressText.indexOf(item.addressText) > -1
           })[0].nowInfo.Temp
