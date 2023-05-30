@@ -2,7 +2,8 @@ export default {
   home: {
     Fund: '基金',
     Weather: '天气',
-    Bill: '记账本'
+    Bill: '记账本',
+    Oil: '油价'
   },
   weather: {
     today: '今天',

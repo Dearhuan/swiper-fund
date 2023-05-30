@@ -6,6 +6,7 @@
     <div class="flex box flex-c font-bold">
       <div class="btn fund" @click="router.push('/fund')">{{ $t('home.Fund') }}</div>
       <div class="btn weather" @click="router.push('/weather')">{{ $t('home.Weather') }}</div>
+      <div class="btn oil" @click="router.push('/oil')">{{ $t('home.Oil') }}</div>
       <a class="btn bill" href="https://dearhuan.gitee.io/vip/#/home">{{ $t('home.Bill') }}</a>
     </div>
     <div class="locale">
@@ -186,10 +187,14 @@ onMounted(() => {
       animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, rgb(171, 220, 255) 10%, rgb(3, 150, 255) 100%);
     }
+    .oil {
+      animation: fadeIn-lt 2s;
+      background: linear-gradient(135deg, rgb(160, 254, 101) 10%, rgb(94, 252, 232) 100%);
+    }
 
     .bill {
       text-decoration: none;
-      animation: fadeIn-lt 2s;
+      animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, #BB4E75 30%, #BC78EC 100%);
     }
   }

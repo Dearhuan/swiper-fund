@@ -2,7 +2,8 @@ export default {
   home: {
     Fund: 'Fund',
     Weather: 'Weather',
-    Bill: 'Bill'
+    Bill: 'Bill',
+    Oil: 'Oil',
   },
   weather: {
     today: 'Today',

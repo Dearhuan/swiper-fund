@@ -21,7 +21,7 @@ const routes = [
     path: '/fund',
     component: () => import('@/view/fund/index.vue'),
     meta: {
-      title: '',
+      title: '基金',
       showTabBar: true
     }
   },
@@ -31,6 +31,15 @@ const routes = [
     component: () => import('@/view/weather/index.vue'),
     meta: {
       title: '天气',
+      showTabBar: true
+    }
+  },
+  {
+    name: 'oil',
+    path: '/oil',
+    component: () => import('@/view/oil/index.vue'),
+    meta: {
+      title: '油价',
       showTabBar: true
     }
   },
