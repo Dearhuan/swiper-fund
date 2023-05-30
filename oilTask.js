@@ -52,9 +52,14 @@ const getOilInfo = () => {
   })
 }
 
+const getNowSeconds = () => {
+  //本地时间 + 本地时间与格林威治时间的时间差 + GMT+8与格林威治的时间差 
+  return new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000)
+}
+
 const oilTask = async () => {
-  const date = dateFormater('YYYY-MM-DD')
-  const updateTime = dateFormater('HH:mm:ss')
+  const date = dateFormater('YYYY-MM-DD', getNowSeconds())
+  const updateTime = dateFormater('HH:mm:ss', getNowSeconds())
   const res = await getOilInfo()
   const obj = readDataList(dataPath)
   if (Array.isArray(res) && res.length > 0) {
