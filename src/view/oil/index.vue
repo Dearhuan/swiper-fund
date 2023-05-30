@@ -3,7 +3,7 @@
     <div class="box">
       <swiper loop>
         <swiper-slide>
-          <div class="box-item box-top" :style="{
+          <div @click="showOilChart = true" class="box-item box-top" :style="{
             background: bgColors[getRandNum(0, bgColors.length)]
           }">
             <div class="details flex">
@@ -18,7 +18,7 @@
           <div class="box-item box-bottom" :style="{
             background: bgColors[getRandNum(0, bgColors.length)]
           }">
-            <div class="details padding-b-20" v-for="(info) in data.list">
+            <div v-for="(info) in data.list" @click="handleCityChart(info)" class="details padding-b-20">
               <div class="flex padding-b-10">
                 <div class="flex">{{ $t('weather.city') }}：<svg t="1676626400175" class="icon" viewBox="0 0 1024 1024" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" p-id="6063" width="24" height="24">
@@ -145,15 +145,101 @@
         </swiper-slide>
       </swiper>
     </div>
+
+    <div v-show="showOilChart" class="container-chart flex flex-c flex-column">
+      <div ref="containerChart" style="width: 90vw;height: 80vh;"></div>
+      <svg @click="showOilChart = false" t="1677463626547" class="icon" viewBox="0 0 1024 1024" version="1.1"
+        xmlns="http://www.w3.org/2000/svg" p-id="8372" width="32" height="32">
+        <path
+          d="M510.957251 351.97026 1021.893013 0 669.922752 510.935762 1021.893013 1021.8705 510.957251 669.901263 0.021489 1021.8705 351.99175 510.935762 0.021489 0Z"
+          fill="#4C4C4C" p-id="8373"></path>
+      </svg>
+    </div>
+    <div v-show="showOilCityChart" class="container-chart flex flex-c flex-column">
+      <div ref="cityChart" style="width: 90vw;height: 40vh;"></div>
+      <svg @click="showOilCityChart = false" t="1677463626547" class="icon" viewBox="0 0 1024 1024" version="1.1"
+        xmlns="http://www.w3.org/2000/svg" p-id="8372" width="32" height="32">
+        <path
+          d="M510.957251 351.97026 1021.893013 0 669.922752 510.935762 1021.893013 1021.8705 510.957251 669.901263 0.021489 1021.8705 351.99175 510.935762 0.021489 0Z"
+          fill="#4C4C4C" p-id="8373"></path>
+      </svg>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, onMounted, Ref } from 'vue'
 import data from '@/configs/oil.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { bgColors } from '@/configs'
+import { useEcharts } from '@/utils/echarts/useEcharts'
+import { RenderType, ThemeType } from '@/utils/echarts/echarts-type'
+
+const topCityName = '广东'
+
+const showOilChart = ref<Boolean>(false)
+const containerChart = ref<HTMLDivElement | null>(null)
+const { setOption } = useEcharts(
+  containerChart as Ref<HTMLDivElement>,
+    RenderType['SVGRenderer'],
+    ThemeType['Light']
+)
+
+const showOilCityChart = ref<Boolean>(false)
+const cityChart = ref<HTMLDivElement | null>(null)
+const { setOption: setCityOption } = useEcharts(
+  cityChart as Ref<HTMLDivElement>,
+    RenderType['SVGRenderer'],
+    ThemeType['Light']
+) 
+
+const handleCityChart = (info: any) => {
+  const option = {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '5%',
+      left: 'center'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: [
+          { value: info['92h'], name: '92h' },
+          { value: info['95h'], name: '95h' },
+          { value: info['98h'], name: '98h' },
+          { value: info['0h'], name: '0h' },
+        ]
+      }
+    ]
+  }
+  setCityOption(option) 
+  showOilCityChart.value = true
+}
 
 const getRandNum = (min: any, max: any) => {
   return parseInt(Math.random() * (max - min + 1) + min);
@@ -161,8 +247,92 @@ const getRandNum = (min: any, max: any) => {
 
 onMounted(() => {
   data.list.unshift(...data.list.splice(data.list.findIndex((item) => {
-  return item.city === '广东'
-})))
+    return item.city === topCityName
+  })))
+
+  const option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+      }
+    },
+    legend: {},
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'value'
+    },
+    yAxis: {
+      type: 'category',
+      data: data.list.map(item => {
+        return item.city
+      })
+    },
+    series: [
+      {
+        name: '92h',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: data.list.map(item => {
+          return item['92h']
+        })
+      },
+      {
+        name: '95h',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: data.list.map(item => {
+          return item['95h']
+        })
+      },
+      {
+        name: '98h',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: data.list.map(item => {
+          return item['98h']
+        })
+      },
+      {
+        name: '0h',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: data.list.map(item => {
+          return item['0h']
+        })
+      }
+    ]
+  }
+  setOption(option)
 })
 </script>
 
@@ -268,6 +438,21 @@ onMounted(() => {
           margin-bottom: 20px;
         }
       }
+    }
+  }
+  .container-chart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    opacity: 0.8;
+    animation: fadeIn-bottom 0.5s;
+
+    .icon {
+      margin-top: 30px;
     }
   }
 }
