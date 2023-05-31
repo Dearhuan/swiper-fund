@@ -168,6 +168,7 @@
 </template>
 
 <script setup lang="ts">
+import * as echarts from 'echarts'
 import { ref, onMounted, Ref } from 'vue'
 import data from '@/configs/oil.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -196,48 +197,71 @@ const { setOption: setCityOption } = useEcharts(
 
 const handleCityChart = (info: any) => {
   const option = {
+    color: ['#80FFA5'],
+    title: {
+      text: '今日油价'
+    },
     tooltip: {
-      trigger: 'item'
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        label: {
+          backgroundColor: '#6a7985'
+        }
+      }
     },
     legend: {
-      top: '5%',
-      left: 'center'
+      data: ['Line 1']
     },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: [
+      {
+        type: 'category',
+        boundaryGap: false,
+        data: ['92h', '95h', '98h', '0h']
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
+        name: 'Line 1',
+        type: 'line',
+        stack: 'Total',
+        smooth: true,
+        lineStyle: {
+          width: 0
         },
-        label: {
-          show: false,
-          position: 'center'
+        showSymbol: false,
+        areaStyle: {
+          opacity: 0.8,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: 'rgb(128, 255, 165)'
+            },
+            {
+              offset: 1,
+              color: 'rgb(1, 191, 236)'
+            }
+          ])
         },
         emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold'
-          }
+          focus: 'series'
         },
-        labelLine: {
-          show: false
-        },
-        data: [
-          { value: info['92h'], name: '92h' },
-          { value: info['95h'], name: '95h' },
-          { value: info['98h'], name: '98h' },
-          { value: info['0h'], name: '0h' },
-        ]
+        data: [info['92h'], info['95h'], info['98h'], info['0h']]
       }
     ]
   }
-  setCityOption(option) 
+  setCityOption(option)
   showOilCityChart.value = true
 }
 
