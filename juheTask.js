@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url'
 
 const JuheApiKey = 'b8757c3851968e979f533f27fc7969c7'
 
+const JuheBaseUrl = 'http://apis.juhe.cn/fapigx/'
+
 const JuheUrls = {
   networkhot: `${JuheBaseUrl}networkhot/query`,
   healthtip: `${JuheBaseUrl}healthtip/query`,
