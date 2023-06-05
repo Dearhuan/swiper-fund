@@ -2,8 +2,18 @@ import fs from 'fs'
 import path from 'path'
 import axios from 'axios'
 import { fileURLToPath } from 'url'
-import { JuheUrls, JuheApiKey } from './src/configs'
-import { randomNum, dateFormater } from './src/utils'
+
+const JuheApiKey = 'b8757c3851968e979f533f27fc7969c7'
+
+const JuheUrls = {
+  networkhot: `${JuheBaseUrl}networkhot/query`,
+  healthtip: `${JuheBaseUrl}healthtip/query`,
+  soup: `${JuheBaseUrl}soup/query`,
+  wxhottopic: `${JuheBaseUrl}wxhottopic/query`,
+  mingyan: `${JuheBaseUrl}mingyan/query`,
+  everyday: `${JuheBaseUrl}everyday/query`,
+  calendar: `${JuheBaseUrl}calendar/query`
+}
 
 const __fileName = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__fileName)
@@ -13,6 +23,25 @@ const dataPath = rootPath + '/src/configs/juhe.json'
 const writeDataList = (path, data) => {
   fs.writeFileSync(path, JSON.stringify(data))
 }
+
+const dateFormater = (formater, time) => {
+  let date = time ? new Date(time) : new Date(),
+    Y = date.getFullYear() + '',
+    M = date.getMonth() + 1,
+    D = date.getDate(),
+    H = date.getHours(),
+    m = date.getMinutes(),
+    s = date.getSeconds();
+  return formater.replace(/YYYY|yyyy/g, Y)
+    .replace(/YY|yy/g, Y.substr(2, 2))
+    .replace(/MM/g, (M < 10 ? '0' : '') + M)
+    .replace(/DD/g, (D < 10 ? '0' : '') + D)
+    .replace(/HH|hh/g, (H < 10 ? '0' : '') + H)
+    .replace(/mm/g, (m < 10 ? '0' : '') + m)
+    .replace(/ss/g, (s < 10 ? '0' : '') + s)
+}
+
+const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const sendJuheRequest = (url, method, params) => {
   return new Promise((resolve, reject) => {
