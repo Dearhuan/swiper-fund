@@ -74,74 +74,74 @@ const juheTask = async () => {
     data: networkhot.list
   })
 
-  const healthtip = await sendJuheRequest(
-    JuheUrls['healthtip'], 
-    'post', 
-    {
-      key: JuheApiKey
-    })
-  healthtip.content && juheList.push({
-    type: 'healthtip',
-    data: healthtip.content
-  })
+//   const healthtip = await sendJuheRequest(
+//     JuheUrls['healthtip'], 
+//     'post', 
+//     {
+//       key: JuheApiKey
+//     })
+//   healthtip.content && juheList.push({
+//     type: 'healthtip',
+//     data: healthtip.content
+//   })
 
-  const soup = await sendJuheRequest(
-    JuheUrls['soup'], 
-    'post', 
-    {
-      key: JuheApiKey
-    })
-  soup.text && juheList.push({
-    type: 'soup',
-    data: soup.text
-  })
+//   const soup = await sendJuheRequest(
+//     JuheUrls['soup'], 
+//     'post', 
+//     {
+//       key: JuheApiKey
+//     })
+//   soup.text && juheList.push({
+//     type: 'soup',
+//     data: soup.text
+//   })
 
-  const wxhottopic = await sendJuheRequest(
-    JuheUrls['wxhottopic'], 
-    'post', 
-    {
-      key: JuheApiKey
-    })
-  wxhottopic.list && juheList.push({
-    type: 'wxhottopic',
-    data: wxhottopic.list
-  })
+//   const wxhottopic = await sendJuheRequest(
+//     JuheUrls['wxhottopic'], 
+//     'post', 
+//     {
+//       key: JuheApiKey
+//     })
+//   wxhottopic.list && juheList.push({
+//     type: 'wxhottopic',
+//     data: wxhottopic.list
+//   })
 
-  const mingyan = await sendJuheRequest(
-    JuheUrls['mingyan'], 
-    'post', 
-    {
-      key: JuheApiKey,
-      num: 5,
-      typeid: randomNum(1, 45)
-    })
-  mingyan.list && juheList.push({
-    type: 'mingyan',
-    data: mingyan.list
-  })
+//   const mingyan = await sendJuheRequest(
+//     JuheUrls['mingyan'], 
+//     'post', 
+//     {
+//       key: JuheApiKey,
+//       num: 5,
+//       typeid: randomNum(1, 45)
+//     })
+//   mingyan.list && juheList.push({
+//     type: 'mingyan',
+//     data: mingyan.list
+//   })
 
-  const everyday = await sendJuheRequest(
-    JuheUrls['everyday'], 
-    'post', 
-    {
-      key: JuheApiKey
-    })
-  everyday && juheList.push({
-    type: 'everyday',
-    data: everyday
-  })
+//   const everyday = await sendJuheRequest(
+//     JuheUrls['everyday'], 
+//     'post', 
+//     {
+//       key: JuheApiKey
+//     })
+//   everyday && juheList.push({
+//     type: 'everyday',
+//     data: everyday
+//   })
 
-  const calendar = await sendJuheRequest(
-    JuheUrls['calendar'], 
-    'post', 
-    {
-      key: JuheApiKey,
-      data: dateFormater('YYYY-MM-DD')
-    })
-  calendar.data && juheList.push({
-    type: 'calendar',
-    data: calendar.data
-  })
+//   const calendar = await sendJuheRequest(
+//     JuheUrls['calendar'], 
+//     'post', 
+//     {
+//       key: JuheApiKey,
+//       data: dateFormater('YYYY-MM-DD')
+//     })
+//   calendar.data && juheList.push({
+//     type: 'calendar',
+//     data: calendar.data
+//   })
 
   writeDataList(dataPath, juheList)
 }
