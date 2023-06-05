@@ -176,3 +176,5 @@ export const clipboardImg = (html: HTMLImageElement) => {
     });
   };
 }
+
+export const randomNum = (min: any, max: any) => Math.floor(Math.random() * (max - min + 1)) + min;

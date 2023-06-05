@@ -7,6 +7,7 @@
       <div class="btn fund" @click="router.push('/fund')">{{ $t('home.Fund') }}</div>
       <div class="btn weather" @click="router.push('/weather')">{{ $t('home.Weather') }}</div>
       <div class="btn oil" @click="router.push('/oil')">{{ $t('home.Oil') }}</div>
+      <div class="btn juhe" @click="router.push('/juhe')">{{ $t('home.Juhe') }}</div>
       <a class="btn bill" href="https://dearhuan.gitee.io/vip/#/home">{{ $t('home.Bill') }}</a>
     </div>
     <div class="locale">
@@ -191,10 +192,14 @@ onMounted(() => {
       animation: fadeIn-lt 2s;
       background: linear-gradient(135deg, rgb(160, 254, 101) 10%, rgb(94, 252, 232) 100%);
     }
+    .juhe {
+      animation: fadeIn-rt 2s;
+      background: linear-gradient(135deg, rgb(255, 168, 168) 10%, rgb(252, 255, 0) 100%);
+    }
 
     .bill {
       text-decoration: none;
-      animation: fadeIn-rt 2s;
+      animation: fadeIn-lt 2s;
       background: linear-gradient(135deg, #BB4E75 30%, #BC78EC 100%);
     }
   }

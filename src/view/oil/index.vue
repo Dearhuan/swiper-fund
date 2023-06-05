@@ -173,9 +173,18 @@ import { ref, onMounted, Ref } from 'vue'
 import data from '@/configs/oil.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
-import { bgColors } from '@/configs'
+import { bgColors, Colors } from '@/configs'
+import { randomNum } from '@/utils'
 import { useEcharts } from '@/utils/echarts/useEcharts'
 import { RenderType, ThemeType } from '@/utils/echarts/echarts-type'
+
+interface OilData {
+  'city': string;
+  '92h': string;
+  '95h': string;
+  '98h': string;
+  '0h': string;
+}
 
 const topCityName = '广东'
 
@@ -195,11 +204,13 @@ const { setOption: setCityOption } = useEcharts(
     ThemeType['Light']
 ) 
 
-const handleCityChart = (info: any) => {
+const handleCityChart = (info: OilData) => {
+  const randomNumber = randomNum(0, Colors.length)
+  const color = Colors[randomNumber]
   const option = {
-    color: ['#80FFA5'],
+    color: [color],
     title: {
-      text: '今日油价'
+      text: `${info.city}-今日油价`
     },
     tooltip: {
       trigger: 'axis',
@@ -275,13 +286,18 @@ onMounted(() => {
   })))
 
   const option = {
+    title: {
+      text: `城市油价总览`
+    },
     tooltip: {
       trigger: 'axis',
       axisPointer: {
         type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
       }
     },
-    legend: {},
+    legend: {
+      top: 30
+    },
     grid: {
       left: '3%',
       right: '4%',

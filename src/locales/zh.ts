@@ -3,7 +3,8 @@ export default {
     Fund: '基金',
     Weather: '天气',
     Bill: '记账本',
-    Oil: '油价'
+    Oil: '油价',
+    Juhe: '聚合',
   },
   weather: {
     today: '今天',

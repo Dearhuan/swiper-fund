@@ -4,6 +4,7 @@ export default {
     Weather: 'Weather',
     Bill: 'Bill',
     Oil: 'Oil',
+    Juhe: 'Aggregation',
   },
   weather: {
     today: 'Today',

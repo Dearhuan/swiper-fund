@@ -44,6 +44,15 @@ const routes = [
     }
   },
   {
+    name: 'juhe',
+    path: '/juhe',
+    component: () => import('@/view/juhe/index.vue'),
+    meta: {
+      title: '聚合',
+      showTabBar: true
+    }
+  },
+  {
     name: 'amap',
     path: '/amap',
     component: () => import('@/components/aMap/index.vue')

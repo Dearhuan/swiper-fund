@@ -93,3 +93,103 @@ export const cityLocation = [
     lnglat: [109.3716, 18.3698]
   },
 ]
+
+export const Colors = [
+  '#3C403B',
+  '#62BC3E',
+  '#0071BC',
+  '#65C8D0',
+  '#00B36A',
+  '#0057D9',
+  '#FFAA44',
+  '#FFFFFF',
+  '#FCF6F6',
+  '#E2D7D7',
+  '#E73F5F',
+  '#CE1743',
+  '#9DEAFF',
+  '#07DBFF',
+  '#3C403B',
+  '#32CCBC',
+  '#F6416C',
+  '#F8D800',
+  '#EA5455',
+  '#7367F0',
+  '#32CCBC',
+  '#1D6FA3',
+  '#3C8CE7',
+  '#FCFF00',
+  '#BC78EC',
+]
+
+export const JuheBaseUrl = 'http://apis.juhe.cn/fapigx/'
+
+export const JuheApiKey = 'b8757c3851968e979f533f27fc7969c7'
+
+export const JuheUrls = {
+  networkhot: `${JuheBaseUrl}networkhot/query`,
+  healthtip: `${JuheBaseUrl}healthtip/query`,
+  soup: `${JuheBaseUrl}soup/query`,
+  wxhottopic: `${JuheBaseUrl}wxhottopic/query`,
+  mingyan: `${JuheBaseUrl}mingyan/query`,
+  everyday: `${JuheBaseUrl}everyday/query`,
+  calendar: `${JuheBaseUrl}calendar/query`
+}
+
+export const JuheTitles = {
+  networkhot: '全网热搜榜',
+  healthtip: '健康小贴士',
+  soup: '每日心灵鸡汤语录',
+  wxhottopic: '微信热搜榜',
+  mingyan: '名人名言',
+  everyday: '每日英语',
+  calendar: '万年历',
+}
+
+export const MingyanIdToTypes = {
+  1: '爱情',
+  2: '道德',
+  3: '青春',
+  4: '愿望',
+  5: '集体',
+  6: '理想',
+  7: '志向',
+  8: '人才',
+  9: '谦虚',
+  10: '人格',
+  11: '天才',
+  12: '青年',
+  13: '社会',
+  14: '国家',
+  15: '财富',
+  16: '智慧',
+  17: '修养',
+  18: '工作',
+  19: '妇女',
+  20: '儿童',
+  21: '思想',
+  22: '理智',
+  23: '学习',
+  24: '科学',
+  25: '信仰',
+  26: '诚信',
+  27: '读书',
+  28: '成败',
+  29: '奉献',
+  30: '劳动',
+  31: '节约',
+  32: '教育',
+  33: '企业',
+  34: '事业',
+  35: '时间',
+  36: '勤奋',
+  37: '民族',
+  38: '真理',
+  39: '友谊',
+  40: '自由',
+  41: '心理',
+  42: '心灵',
+  43: '人生',
+  44: '幸福',
+  45: '团结'
+}
