@@ -51,6 +51,7 @@ const sendRequestWithGet = (url) => {
     axios
       .get(requestUrl)
       .then(res => {
+        console.log(res.data)
         res.data.error_code === 0 ?
           resolve(res.data.result) :
             reject(`request ["GET","${url}"] error`)
