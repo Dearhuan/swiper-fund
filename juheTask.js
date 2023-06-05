@@ -45,6 +45,22 @@ const dateFormater = (formater, time) => {
 
 const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+const sendRequestWithGet = (url) => {
+  const requestUrl = `${url}?key=${JuheApiKey}`
+  return new Promise((resolve, reject) => {
+    axios
+      .get(requestUrl)
+      .then(res => {
+        res.data.error_code === 0 ?
+          resolve(res.data.result) :
+            reject(`request ["GET","${url}"] error`)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
+}
+
 const sendJuheRequest = (url, method, params) => {
   return new Promise((resolve, reject) => {
     axios({
@@ -54,7 +70,7 @@ const sendJuheRequest = (url, method, params) => {
     }).then(res => {
       res.data.error_code === 0 ?
         resolve(res.data.result) : 
-          reject('error')
+          reject(`request ["${method}","${url}"] error`)
     }).catch(err => {
       console.log(err)
     })
@@ -63,12 +79,7 @@ const sendJuheRequest = (url, method, params) => {
 
 const juheTask = async () => {
   let juheList = []
-  const networkhot = await sendJuheRequest(
-    JuheUrls['networkhot'], 
-    'post', 
-    {
-      key: JuheApiKey
-    })
+  const networkhot = await sendRequestWithGet(JuheUrls['networkhot'])
   networkhot.list && juheList.push({
     type: 'networkhot',
     data: networkhot.list
