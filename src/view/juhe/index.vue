@@ -25,6 +25,9 @@
                   <div class="flex font-bold" style="flex: 1;">{{ info.title }}</div>
                 </div>
                 <div class="flex padding-b-10">
+                  <img v-if="info.thumbnail_pic_s" :src="info.thumbnail_pic_s" style="width: 100%;" alt="" />
+                </div>
+                <div class="flex padding-b-10">
                   <div class="flex" style="width: 50px;">时间：</div>
                   <div class="flex font-bold" style="flex: 1;">{{ info.date }}</div>
                 </div>
