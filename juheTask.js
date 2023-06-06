@@ -6,6 +6,11 @@ import { fileURLToPath } from 'url'
 const JuheBaseUrl = 'http://apis.juhe.cn/'
 
 const JuheApiInfo = {
+  toutiao: {
+    title: '新闻头条',
+    url: `http://v.juhe.cn/toutiao/index`,
+    key: '2c401456871eea6e12784c01278d81e1'
+  },
   networkhot: {
     title: '全网热搜榜',
     url: `${JuheBaseUrl}fapigx/networkhot/query`,
@@ -56,6 +61,20 @@ const Animals = [
   '鸡',
   '狗',
   '猪',
+]
+
+const TouTiaoTypes = [
+  'top',
+  'guonei',
+  'guoji',
+  'yule',
+  'tiyu',
+  'junshi',
+  'keji',
+  'caijing',
+  'youxi',
+  'qiche',
+  'jiankang',
 ]
 
 const __fileName = fileURLToPath(import.meta.url)
@@ -125,6 +144,21 @@ const sendJuheRequest = (url, method, params) => {
 
 const juheTask = async () => {
   let juheList = []
+  const toutiao = await sendJuheRequest(
+    JuheApiInfo['toutiao']['url'],
+    'post',
+    {
+      key: JuheApiInfo['toutiao']['key'],
+      type: TouTiaoTypes[randomNum(0, TouTiaoTypes.length - 1)],
+      page: 1,
+      page_size: 30
+    }
+  )
+  toutiao.data && juheList.push({
+    type: 'toutiao',
+    data: toutiao.data
+  })
+
   const networkhot = await sendJuheRequest(
     JuheApiInfo['networkhot']['url'],
     'post',

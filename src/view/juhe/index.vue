@@ -18,7 +18,33 @@
           <div class="box-item box-bottom" :style="{
             background: bgColors[data.length - i] ? bgColors[data.length - i] : bgColors[randomNum(0, bgColors.length)]
           }">
-            <div v-if="item.type === 'networkhot'">
+            <div v-if="item.type === 'toutiao'">
+              <div class="details padding-b-20" v-for="(info) in (item.data as unknown as Array<TouTiaoNews>)">
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 50px;">标题：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ info.title }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 50px;">时间：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ info.date }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 50px;">分类：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ info.category }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 50px;">来源：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ info.author_name }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 50px;">链接：</div>
+                  <div class="flex font-bold wrap-text" style="flex: 1;">
+                    <a :href="info.url" target="_blank" style="color: inherit;">{{ info.url }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else-if="item.type === 'networkhot'">
               <div class="details padding-b-20" v-for="(info) in (item.data as Array<HotSearchTopic>)">
                 <div class="flex padding-b-10">
                   <div class="flex" style="width: 50px;">标题：</div>
@@ -38,7 +64,7 @@
               <div class="details padding-b-20">
                 <div class="flex padding-b-10">
                   <div class="flex" style="width: 50px;">内容：</div>
-                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as HealthTip).content }}</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ item.data }}</div>
                 </div>
               </div>
             </div>
@@ -46,7 +72,7 @@
               <div class="details padding-b-20">
                 <div class="flex padding-b-10">
                   <div class="flex" style="width: 50px;">内容：</div>
-                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as HeartSoup).text }}</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ item.data }}</div>
                 </div>
               </div>
             </div>
@@ -101,34 +127,22 @@
                   <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).qd }}</div>
                 </div>
                 <div>
-                <div class="flex" style="margin-bottom: 10px;">
-                </div>
-                <div class="flex font-small" v-for="(c) in (item.data as ZodiacInfo).currentAge">
-                  <div class="font-bold flex weather-item gradient-text">
-                    <span class="desc">出生年份:</span>
-                    <span class="desc">{{ c.y }}</span>
+                  <div class="flex" style="margin-bottom: 10px;">
                   </div>
-                  <div class="font-bold flex weather-item gradient-text">
-                    <span class="desc">实岁:</span>
-                    <span class="desc">{{ c.s }}</span>
+                  <div class="flex font-small" v-for="(c) in (item.data as ZodiacInfo).currentAge">
+                    <div class="font-bold flex weather-item gradient-text">
+                      <span class="desc">出生年份:</span>
+                      <span class="desc">{{ c.y }}</span>
+                    </div>
+                    <div class="font-bold flex weather-item gradient-text">
+                      <span class="desc">实岁:</span>
+                      <span class="desc">{{ c.s }}</span>
+                    </div>
+                    <div class="font-bold flex weather-item gradient-text">
+                      <span class="desc">虚岁:</span>
+                      <span class="desc">{{ c.x }}</span>
+                    </div>
                   </div>
-                  <div class="font-bold flex weather-item gradient-text">
-                    <span class="desc">虚岁:</span>
-                    <span class="desc">{{ c.x }}</span>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div v-else-if="item.type === 'wxhottopic'">
-              <div class="details padding-b-20" v-for="(info, j) in (item.data as Array<WeiXinHotTopic>)">
-                <div class="flex padding-b-10">
-                  <div class="flex" style="width: 50px;">内容：</div>
-                  <div class="flex font-bold" style="flex: 1;">{{ info.word }}</div>
-                </div>
-                <div class="flex padding-b-10">
-                  <div class="flex">排行：</div>
-                  <div class="flex font-bold">{{ j + 1 }}</div>
                 </div>
               </div>
             </div>
@@ -216,20 +230,18 @@ import data from '@/configs/juhe.json'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { randomNum } from '@/utils'
-import { 
-  bgColors, 
-  JuheTitles, 
-  MingyanIdToTypes 
+import {
+  bgColors,
+  JuheTitles,
+  MingyanIdToTypes
 } from '@/configs'
-import { 
-  HotSearchTopic, 
-  HealthTip, 
-  HeartSoup, 
+import {
+  TouTiaoNews,
+  HotSearchTopic,
   ZodiacInfo,
-  WeiXinHotTopic, 
-  Mingyan, 
-  EnglishDayily, 
-  CanlendarInfo 
+  Mingyan,
+  EnglishDayily,
+  CanlendarInfo
 } from '@/types'
 </script>
 

@@ -137,6 +137,7 @@ export const JuheUrls = {
 }
 
 export const JuheTitles = {
+  toutiao: '新闻头条',
   networkhot: '全网热搜榜',
   healthtip: '健康小贴士',
   soup: '每日心灵鸡汤语录',
