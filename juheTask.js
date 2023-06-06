@@ -200,11 +200,11 @@ const juheTask = async () => {
     'post', 
     {
       key: JuheApiInfo['calendar']['key'],
-      data: dateFormater('YYYY-MM-DD')
+      date: dateFormater('YYYY-MM-DD')
     })
   calendar.data && juheList.push({
     type: 'calendar',
-    date: calendar.data
+    data: calendar.data
   })
 
   writeDataList(dataPath, juheList)
