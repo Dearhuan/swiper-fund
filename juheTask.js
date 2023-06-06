@@ -204,7 +204,7 @@ const juheTask = async () => {
     })
   calendar.data && juheList.push({
     type: 'calendar',
-    data: calendar.data
+    date: calendar.data
   })
 
   writeDataList(dataPath, juheList)
