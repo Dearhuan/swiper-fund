@@ -50,3 +50,26 @@ export interface CanlendarInfo {
   'year-month': string
   date: string
 }
+
+interface CurrentAge {
+  y: number
+  s: number
+  x: number
+}
+
+// 生肖查询
+export interface ZodiacInfo {
+  name: string
+  years: string
+  fw: string
+  sc: string
+  sz: string
+  xyh: string
+  ys: string
+  sy: string
+  aq: string
+  xg: string
+  yd: string
+  qd: string
+  currentAge: Array<CurrentAge>
+}

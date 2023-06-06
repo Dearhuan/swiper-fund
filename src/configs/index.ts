@@ -140,10 +140,49 @@ export const JuheTitles = {
   networkhot: '全网热搜榜',
   healthtip: '健康小贴士',
   soup: '每日心灵鸡汤语录',
+  zodiac: '十二生肖',
   wxhottopic: '微信热搜榜',
   mingyan: '名人名言',
   everyday: '每日英语',
   calendar: '万年历',
+}
+
+export const JuheApiInfo = {
+  networkhot: {
+    title: '全网热搜榜',
+    url: `${JuheBaseUrl}networkhot/query`,
+    key: '8d050f039d36803d57bf0788e35e8bd9'
+  },
+  healthtip: {
+    title: '健康小贴士',
+    url: `${JuheBaseUrl}healthtip/query`,
+    key: 'dfd2a52f9fd2ecb044c70587410a6ab3'
+  },
+  soup: {
+    title: '每日心灵鸡汤语录',
+    url: `${JuheBaseUrl}soup/query`,
+    key: 'aaca4f023e098dbfe1ad0e122a4457ed'
+  },
+  zodiac: {
+    title: '生肖查询',
+    url: `${JuheBaseUrl}zodiac/query`,
+    key: '5671d992d82dd74c4bb34ec90dd0d976'
+  },
+  mingyan: {
+    title: '名人名言',
+    url: `${JuheBaseUrl}mingyan/query`,
+    key: 'b08766cc86252d0bb48d8d16ea38d891'
+  },
+  everyday: {
+    title: '每日英语',
+    url: `${JuheBaseUrl}everyday/query`,
+    key: 'e961b6519af1aaa9d634ab7e382f73e4'
+  },
+  calendar: {
+    title: '万年历',
+    url: `${JuheBaseUrl}calendar/query`,
+    key: '61275a068abf24d94ef77aa354c78687'
+  },
 }
 
 export const MingyanIdToTypes = {

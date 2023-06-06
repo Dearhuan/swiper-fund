@@ -50,6 +50,76 @@
                 </div>
               </div>
             </div>
+            <div v-else-if="item.type === 'zodiac'">
+              <div class="details padding-b-20">
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">生效名称：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).name }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">生肖年份：</div>
+                  <div class="flex font-bold wrap-text" style="flex: 1;">{{ (item.data as ZodiacInfo).years }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">吉祥方位：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).fw }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">吉忌颜色：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).sc }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">吉凶数字：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).sz }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">幸运花：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).xyh }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">总体运势：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).ys }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">事业：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).sy }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">爱情：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).aq }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">性格：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).xg }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">优点：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).yd }}</div>
+                </div>
+                <div class="flex padding-b-10">
+                  <div class="flex" style="width: 80px;">缺点：</div>
+                  <div class="flex font-bold" style="flex: 1;">{{ (item.data as ZodiacInfo).qd }}</div>
+                </div>
+                <div>
+                <div class="flex" style="margin-bottom: 10px;">
+                </div>
+                <div class="flex font-small" v-for="(c) in (item.data as ZodiacInfo).currentAge">
+                  <div class="font-bold flex weather-item gradient-text">
+                    <span class="desc">出生年份:</span>
+                    <span class="desc">{{ c.y }}</span>
+                  </div>
+                  <div class="font-bold flex weather-item gradient-text">
+                    <span class="desc">实岁:</span>
+                    <span class="desc">{{ c.s }}</span>
+                  </div>
+                  <div class="font-bold flex weather-item gradient-text">
+                    <span class="desc">虚岁:</span>
+                    <span class="desc">{{ c.x }}</span>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
             <div v-else-if="item.type === 'wxhottopic'">
               <div class="details padding-b-20" v-for="(info, j) in (item.data as Array<WeiXinHotTopic>)">
                 <div class="flex padding-b-10">
@@ -155,6 +225,7 @@ import {
   HotSearchTopic, 
   HealthTip, 
   HeartSoup, 
+  ZodiacInfo,
   WeiXinHotTopic, 
   Mingyan, 
   EnglishDayily, 
@@ -171,6 +242,11 @@ import {
   100% {
     transform: translateY(0px);
   }
+}
+
+.wrap-text {
+  white-space: normal;
+  word-break: break-all;
 }
 
 .home {
