@@ -3,42 +3,42 @@ import path from 'path'
 import axios from 'axios'
 import { fileURLToPath } from 'url'
 
-const JuheBaseUrl = 'http://apis.juhe.cn/fapigx/'
+const JuheBaseUrl = 'http://apis.juhe.cn/'
 
 const JuheApiInfo = {
   networkhot: {
     title: '全网热搜榜',
-    url: `${JuheBaseUrl}networkhot/query`,
+    url: `${JuheBaseUrl}fapigx/networkhot/query`,
     key: '8d050f039d36803d57bf0788e35e8bd9'
   },
   healthtip: {
     title: '健康小贴士',
-    url: `${JuheBaseUrl}healthtip/query`,
+    url: `${JuheBaseUrl}fapigx/healthtip/query`,
     key: 'dfd2a52f9fd2ecb044c70587410a6ab3'
   },
   soup: {
     title: '每日心灵鸡汤语录',
-    url: `${JuheBaseUrl}soup/query`,
+    url: `${JuheBaseUrl}fapig/soup/query`,
     key: 'aaca4f023e098dbfe1ad0e122a4457ed'
   },
   zodiac: {
     title: '生肖查询',
-    url: `${JuheBaseUrl}zodiac/query`,
+    url: `${JuheBaseUrl}fapig/zodiac/query`,
     key: '5671d992d82dd74c4bb34ec90dd0d976'
   },
   mingyan: {
     title: '名人名言',
-    url: `${JuheBaseUrl}mingyan/query`,
+    url: `${JuheBaseUrl}fapigx/mingyan/query`,
     key: 'b08766cc86252d0bb48d8d16ea38d891'
   },
   everyday: {
     title: '每日英语',
-    url: `${JuheBaseUrl}everyday/query`,
+    url: `${JuheBaseUrl}fapigx/everyday/query`,
     key: 'e961b6519af1aaa9d634ab7e382f73e4'
   },
   calendar: {
     title: '万年历',
-    url: `${JuheBaseUrl}calendar/query`,
+    url: `http://v.juhe.cn/calendar/day`,
     key: '61275a068abf24d94ef77aa354c78687'
   },
 }
