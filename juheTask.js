@@ -108,8 +108,12 @@ const sendJuheRequest = (url, method, params) => {
     axios({
       method: method,
       url: url,
-      data: params
+      data: params,
+      headers: {
+        "Content-Type": 'application/x-www-form-urlencoded'
+      }
     }).then(res => {
+      console.log(res.data)
       res.data.error_code === 0 ?
         resolve(res.data.result) : 
           reject(`request ["${method}","${url}"] error`)
