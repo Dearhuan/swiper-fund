@@ -1,3 +1,4 @@
+import { isClient } from './is'
 //格式化时间
 // dateFormater('YYYY-MM-DD HH:mm:ss')
 // dateFormater('YYYYMMDDHHmmss')
@@ -178,3 +179,28 @@ export const clipboardImg = (html: HTMLImageElement) => {
 }
 
 export const randomNum = (min: any, max: any) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+export const setCookie = (key: string, value: string, expire: number) => {
+  const d = new Date();
+  d.setDate(d.getDate() + expire);
+  document.cookie = `${key}=${value};expires=${d.toUTCString()}`
+};
+
+export const getCookie = (key: string) => {
+  // Environmental Test
+  if (!isClient)
+      throw new Error("Non-browser environment, unavailable 'getCookie'");
+  if (!document.cookie)
+      return null;
+  if (key) {
+      const reg = new RegExp(`(^| )${key}=([^;]*)(;|$)`);
+      const arr = document.cookie.match(reg);
+      return arr ? arr[2] : undefined;
+  }
+  // Get Cookies && String => Array
+  return document.cookie.split(';');
+};
+
+export const delCookie = (key: string) => {
+  document.cookie = `${encodeURIComponent(key)}=;expires=${new Date()}`
+};

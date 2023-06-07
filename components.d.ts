@@ -8,10 +8,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AMap: typeof import('./src/components/aMap/index.vue')['default']
-    'Color-': typeof import('./src/components/color-/index.vue')['default']
-    ColorAnimateText: typeof import('./src/components/color-animate-text/index.vue')['default']
-    'ColorAnimateText.component': typeof import('./src/components/color-animate-text/color-animate-text.component.vue')['default']
-    PictureInPicture: typeof import('./src/components/PictureInPicture/PictureInPicture.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
