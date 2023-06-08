@@ -1,6 +1,16 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { getCookie } from '@/utils'
 import { useMessage } from '@/utils/useMessage'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+NProgress.configure({
+  easing: 'ease',
+  speed: 500,
+  showSpinner: true,
+  trickleSpeed: 200,
+  minimum: 0.3
+})
 
 const routes = [
   {
@@ -87,6 +97,7 @@ router.beforeEach((to, from, next) => {
   const title = to?.meta?.title
   const isLogin = getCookie('isLogin')
   const { showWarningMsg } = useMessage()
+  NProgress.start()
   if (title) {
     document.title = title as string
   }
@@ -104,6 +115,10 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })
 
 export default router

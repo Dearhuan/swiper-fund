@@ -3,6 +3,14 @@ $incomeColor: #ffa500;
 $whiteColor: #fff;
 $blackColor: #000;
 
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 .flex {
   display: flex;
 }
@@ -122,4 +130,57 @@ $blackColor: #000;
   100% {
     background-position: 28000px;
   }
+}
+
+@keyframes fadeIn-lt {
+  from {
+    transform: translate(-50vw);
+  }
+
+  to {
+    transform: translate(0, 180deg);
+  }
+}
+
+@keyframes fadeIn-rt {
+  from {
+    transform: translate(50vw);
+  }
+
+  to {
+    transform: translate(0);
+  }
+}
+
+@keyframes fadeIn-top {
+  0% {
+    transform: translateY(100vh);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeIn-bottom {
+  0% {
+    transform: translateY(-100vh);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.fade-lt {
+  animation: fadeIn-lt 2s;
+}
+.fade-rt {
+  animation: fadeIn-rt 2s;
+}
+.fade-top {
+  animation: fadeIn-top 2s;
+}
+.fade-bottom {
+  animation: fadeIn-bottom 2s;
 }

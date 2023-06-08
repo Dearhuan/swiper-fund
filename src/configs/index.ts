@@ -233,3 +233,126 @@ export const MingyanIdToTypes = {
   44: '幸福',
   45: '团结'
 }
+
+export const QuestionAndAnswers = [
+  {
+    index: 0,
+    question: '进来页面时的封面图是哪首专辑的?',
+    answers: [
+      'Jay',
+      '范特西',
+      '八度空间',
+      '叶惠美',
+      '七里香',
+      '十一月的肖邦',
+      '依然范特西',
+      '我很忙',
+      '魔杰座',
+      '跨时代',
+      '惊叹号',
+      '十二新作',
+      '哎哟，不错哦',
+      '周杰伦的床边故事',
+      '最伟大的作品',
+    ],
+    answer: 'Jay',
+    isCorrect: false
+  },
+  {
+    index: 1,
+    question: '藤原拓海在藤原とラふ店开的车?',
+    answers: [
+      'AE-86',
+      '本田雅阁',
+      '梅赛德斯奔驰'
+    ],
+    answer: 'AE-86',
+    isCorrect: false
+  },
+  {
+    index: 2,
+    question: '藤原拓海是如何成为“漂移”高手的?',
+    answers: [
+      '做豆腐',
+      '加油站兼职',
+      '送豆腐'
+    ],
+    answer: '送豆腐',
+    isCorrect: false
+  },
+  {
+    index: 3,
+    question: '周杰伦的英文名是?',
+    answers: [
+      'Jay-Chou',
+      'Jay-Zhou',
+      'Jay-Jay',
+      'Jay',
+    ],
+    answer: 'Jay-Chou',
+    isCorrect: false
+  },
+  {
+    index: 4,
+    question: '藤原拓海分手后唱的哪首歌?',
+    answers: [
+      '明明就',
+      '一路向北',
+      '断了的弦',
+      '我落泪情绪零碎'
+    ],
+    answer: '一路向北',
+    isCorrect: false
+  },
+  {
+    index: 5,
+    question: '藤原拓海分手前他女友坐的什么车?',
+    answers: [
+      '梅赛德斯-奔驰',
+      '丰田AE-86',
+      '本田雅阁',
+    ],
+    answer: '梅赛德斯-奔驰',
+    isCorrect: false
+  },
+  {
+    index: 6,
+    question: '前奏一响上台领奖是哪首音乐?',
+    answers: [
+      '晴天',
+      '夜曲',
+      '反方向的钟',
+      '以父之名',
+    ],
+    answer: '夜曲',
+    isCorrect: false
+  },
+  {
+    index: 7,
+    question: '头文字D中哪位角色最帅?',
+    answers: [
+      '藤原拓海',
+      '高桥凉介',
+      '中里毅',
+      '藤原文太',
+      '岩城清次',
+      '须藤京一',
+      '茂木夏树',
+      '阿杜',
+    ],
+    answer: '藤原拓海',
+    isCorrect: false
+  },
+  {
+    index: 8,
+    question: '头文字D中决赛地点?',
+    answers: [
+      '富士山',
+      '秋名山',
+      '武当山',
+      '峨眉山',
+    ],
+    answer: '秋名山',
+    isCorrect: false
+  },
+]

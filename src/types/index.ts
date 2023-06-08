@@ -87,3 +87,12 @@ export interface TouTiaoNews {
   thumbnail_pic_s03: string
   is_content: string
 }
+
+// 问题&答案
+export interface QuestionAndAnswer {
+  index: number
+  question: string
+  answers: Array<string>
+  answer: string
+  isCorrect: boolean
+} 

@@ -1,4 +1,8 @@
 import { isClient } from './is'
+import { useMessage } from '@/utils/useMessage'
+
+const { showErrorMsg } = useMessage()
+
 //格式化时间
 // dateFormater('YYYY-MM-DD HH:mm:ss')
 // dateFormater('YYYYMMDDHHmmss')
@@ -131,7 +135,7 @@ export const getSeasonByDate = (date: string) => {
     case '10':
     case '11':
       return '秋天'
-  
+
     default:
       return ''
   }
@@ -156,7 +160,7 @@ export const clipboardImg = (html: HTMLImageElement) => {
   img.onload = () => {
     //防止有缓存，绘制之前先清除画布
     ctx?.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx?.drawImage(img, 0, 0); 
+    ctx?.drawImage(img, 0, 0);
     // 将canvas转为blob
     canvas.toBlob(async (blob) => {
       console.log(blob);
@@ -181,26 +185,37 @@ export const clipboardImg = (html: HTMLImageElement) => {
 export const randomNum = (min: any, max: any) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 export const setCookie = (key: string, value: string, expire: number) => {
-  const d = new Date();
-  d.setDate(d.getDate() + expire);
-  document.cookie = `${key}=${value};expires=${d.toUTCString()}`
+  try {
+    const d = new Date();
+    d.setDate(d.getDate() + expire);
+    document.cookie = `${key}=${value};expires=${d.toUTCString()}`
+  } catch (error) {
+    showErrorMsg('Set Cookie Error!', 1000)
+  }
 };
 
 export const getCookie = (key: string) => {
-  // Environmental Test
-  if (!isClient)
+  try {
+    if (!isClient)
       throw new Error("Non-browser environment, unavailable 'getCookie'");
-  if (!document.cookie)
+    if (!document.cookie)
       return null;
-  if (key) {
+    if (key) {
       const reg = new RegExp(`(^| )${key}=([^;]*)(;|$)`);
       const arr = document.cookie.match(reg);
       return arr ? arr[2] : undefined;
+    }
+    // Get Cookies && String => Array
+    return document.cookie.split(';');
+  } catch (error) {
+    showErrorMsg('Get Cookie Error!')
   }
-  // Get Cookies && String => Array
-  return document.cookie.split(';');
 };
 
 export const delCookie = (key: string) => {
-  document.cookie = `${encodeURIComponent(key)}=;expires=${new Date()}`
+  try {
+    document.cookie = `${encodeURIComponent(key)}=;expires=${new Date()}`
+  } catch (error) {
+    showErrorMsg('Delete Cookie Error!')
+  }
 };
