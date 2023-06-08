@@ -124,7 +124,7 @@ watch([defaultQuestionIndex], () => {
         font-size: 36px;
         font-weight: bold;
         margin-left: 80px;
-        margin-top: 80px;
+        margin-top: 2vh;
         animation: fadeIn-top 1.5s;
 
         span {
@@ -161,7 +161,7 @@ watch([defaultQuestionIndex], () => {
 
       .login-box-wrapper {
         width: inherit;
-        padding: 0 5vw 5vh;
+        padding: 0 5vw 2vh;
         .login-block {
         display: flex;
         flex-direction: column;
