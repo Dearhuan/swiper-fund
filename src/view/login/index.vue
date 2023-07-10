@@ -56,13 +56,31 @@ const showCover = ref<Boolean>(true)
 
 const defaultQuestionIndex = ref<number>(0)
 
-const questionAndAnswers = ref<Array<QuestionAndAnswer>>(QuestionAndAnswers)
+const questionAndAnswers = ref<Array<QuestionAndAnswer>>([])
+
+let list = QuestionAndAnswers
 
 onMounted(() => {
   setTimeout(() => {
     showCover.value = false
   }, 2000);
 })
+
+const getObjectFromAnswers = (answers: Array<QuestionAndAnswer>) => {
+  return answers[Math.floor(Math.random() * answers.length)]
+}
+
+// 随机获取三组问题
+const getAnswers = () => {
+  let answers = []
+  for (let i = 0; i < 3; i++) {
+    answers.push(getObjectFromAnswers(list))
+    list = list.slice(0, list.length - 1)
+  }
+  return answers
+}
+
+questionAndAnswers.value = getAnswers()
 
 const checkAnswer = (answer: string, selectedAnswer: string, index: number) => {
   if (answer === selectedAnswer) {
