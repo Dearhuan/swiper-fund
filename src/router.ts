@@ -29,6 +29,15 @@ const routes = [
       isNeedLogin: false,
     }
   },
+  // {
+  //   name: 'test',
+  //   path: '/test',
+  //   component: () => import('@/view/test/index.vue'),
+  //   meta: {
+  //     title: '测试',
+  //     isNeedLogin: false,
+  //   }
+  // },
   {
     name: 'home',
     path: '/home',
@@ -64,6 +73,16 @@ const routes = [
     component: () => import('@/view/oil/index.vue'),
     meta: {
       title: '油价',
+      isNeedLogin: true,
+      showTabBar: true
+    }
+  },
+  {
+    name: 'oilTool',
+    path: '/oilTool',
+    component: () => import('@/view/oilTool/index.vue'),
+    meta: {
+      title: '油价计算器',
       isNeedLogin: true,
       showTabBar: true
     }

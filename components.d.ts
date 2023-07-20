@@ -8,7 +8,12 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AMap: typeof import('./src/components/aMap/index.vue')['default']
+    CalendarBox: typeof import('./src/components/CalendarBox/index.vue')['default']
+    InputNumber: typeof import('./src/components/InputNumber/index.vue')['default']
+    OilPriceCalculator: typeof import('./src/components/OilPriceCalculator/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Test: typeof import('./src/components/test/index.vue')['default']
+    Year: typeof import('./src/components/Year/index.vue')['default']
   }
 }

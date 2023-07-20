@@ -4,6 +4,7 @@ export default {
     Weather: 'Weather',
     Bill: 'Bill',
     Oil: 'Oil',
+    OilTool: 'OilTool',
     Juhe: 'Aggregation',
   },
   weather: {
