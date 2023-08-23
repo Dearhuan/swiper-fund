@@ -68,6 +68,16 @@ const routes = [
     }
   },
   {
+    name: 'weather-card',
+    path: '/weather/card',
+    component: () => import('@/view/weather/cards.vue'),
+    meta: {
+      title: '天气卡',
+      isNeedLogin: true,
+      showTabBar: true
+    }
+  },
+  {
     name: 'oil',
     path: '/oil',
     component: () => import('@/view/oil/index.vue'),
@@ -104,7 +114,7 @@ const routes = [
     meta: {
       isNeedLogin: true
     }
-  }
+  },
 ]
 
 const router = createRouter({

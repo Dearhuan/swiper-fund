@@ -18,7 +18,8 @@
           <div class="box-item box-bottom" :style="{
             background: bgColors[data.length - i] ? bgColors[data.length - i] : bgColors[getRandNum(0, bgColors.length)]
           }">
-            <div class="details padding-b-20" v-for="(info) in item.list" @click="handleMap(info.addressText)">
+            <!-- <div class="details padding-b-20" v-for="(info) in item.list" @click="handleMap(info.addressText)"> -->
+            <div class="details padding-b-20" v-for="(info) in item.list" @click="handleOpenCard(info)">
               <div class="flex padding-b-10">
                 <div class="flex">{{ $t('weather.city') }}：<svg t="1676626400175" class="icon" viewBox="0 0 1024 1024" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" p-id="6063" width="24" height="24">
@@ -246,6 +247,12 @@ const handleMap = async (cityText: string) => {
   })
   
   await router.push('/amap')
+}
+
+const handleOpenCard = async (info: any) => {
+  localStorage.setItem('weatherCardInfo', JSON.stringify(info))
+
+  await router.push('/weather/card')
 }
 
 onMounted(() => {
