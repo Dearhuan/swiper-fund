@@ -75,7 +75,7 @@ const paidMoney = ref<number>(0) // 已还金额
 const unPaidMoney = ref<number>(0) // 待还金额
 
 const topMonths = ['01', '02', '03', '04', '05', '06']
-const bottomMonths = ['07', '09', '09', '10', '11', '12']
+const bottomMonths = ['07', '08', '09', '10', '11', '12']
 
 // 日历底部总览信息
 const tooltips = ref([
@@ -119,7 +119,7 @@ const getMonthOption = (months: string[], year: number) => {
       isUnFinished = true
     }
     if ((new Date(`${year}-${itemMonth}-${currentDate.getDate()}`).getMonth() > new Date(`${startYear}-${startMonth - 1}-${startDay}`).getMonth()) &&
-      (new Date(`${year}-${itemMonth + 1}-${currentDate.getDate()}`) < currentDate)) {
+      (new Date(`${year}-${itemMonth}-${currentDate.getDate()}`) < currentDate)) {
       isUnFinished = true
       isUnRelated = true
     }
@@ -180,6 +180,7 @@ onMounted(() => {
     item.paidItem = paidItem
     item.unPaidItem = unPaidItem
   })
+  console.log(list.value)
   paidMoney.value = paidCount * Number(props.money)
   
   const startDate = new Date(props.startDate)
