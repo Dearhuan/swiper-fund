@@ -252,11 +252,12 @@ const handleMap = async (cityText: string) => {
 const handleOpenCard = async (info: any) => {
   localStorage.setItem('weatherCardInfo', JSON.stringify(info))
 
-  await router.push('/weather/card')
+  await router.push('/weather/amap')
 }
 
 onMounted(() => {
   const arr = list.reverse().slice(0, 5)
+  console.log({arr})
   const option = {
     tooltip: {
       trigger: 'axis'

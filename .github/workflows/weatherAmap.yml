@@ -1,9 +1,9 @@
-name: weatherTask1
+name: oilTask
 on:
   workflow_dispatch:
   schedule:
     #时间格式 minute hour day month week 设置的时间是UTC 不是北京时间
-    - cron: "00 10 * * *"
+    - cron: "00 8 * * *"
 
 jobs:
   start:
@@ -24,7 +24,7 @@ jobs:
         run: npm install
       
       - name: Start task
-        run: node weatherTask.js
+        run: node weatherAMap.js
 
       # 提交并推送修改
       - name: Commit files
@@ -32,7 +32,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -m "update weather data"
+          git commit -m "update weatherAmap info"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

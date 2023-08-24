@@ -1,0 +1,83 @@
+{
+  "lives": [
+    {
+      "province": "广东",
+      "city": "天河区",
+      "adcode": "440106",
+      "weather": "阴",
+      "temperature": "27",
+      "winddirection": "北",
+      "windpower": "≤3",
+      "humidity": "99",
+      "reporttime": "2023-08-24 09:01:06",
+      "temperature_float": "27.0",
+      "humidity_float": "99.0"
+    }
+  ],
+  "forecasts": [
+    {
+      "city": "天河区",
+      "adcode": "440106",
+      "province": "广东",
+      "reporttime": "2023-08-24 09:01:06",
+      "casts": [
+        {
+          "date": "2023-08-24",
+          "week": "4",
+          "dayweather": "中雨",
+          "nightweather": "雷阵雨",
+          "daytemp": "33",
+          "nighttemp": "26",
+          "daywind": "北",
+          "nightwind": "北",
+          "daypower": "≤3",
+          "nightpower": "≤3",
+          "daytemp_float": "33.0",
+          "nighttemp_float": "26.0"
+        },
+        {
+          "date": "2023-08-25",
+          "week": "5",
+          "dayweather": "雷阵雨",
+          "nightweather": "多云",
+          "daytemp": "33",
+          "nighttemp": "26",
+          "daywind": "北",
+          "nightwind": "北",
+          "daypower": "≤3",
+          "nightpower": "≤3",
+          "daytemp_float": "33.0",
+          "nighttemp_float": "26.0"
+        },
+        {
+          "date": "2023-08-26",
+          "week": "6",
+          "dayweather": "多云",
+          "nightweather": "多云",
+          "daytemp": "34",
+          "nighttemp": "26",
+          "daywind": "北",
+          "nightwind": "北",
+          "daypower": "≤3",
+          "nightpower": "≤3",
+          "daytemp_float": "34.0",
+          "nighttemp_float": "26.0"
+        },
+        {
+          "date": "2023-08-27",
+          "week": "7",
+          "dayweather": "多云",
+          "nightweather": "多云",
+          "daytemp": "35",
+          "nighttemp": "27",
+          "daywind": "北",
+          "nightwind": "北",
+          "daypower": "≤3",
+          "nightpower": "≤3",
+          "daytemp_float": "35.0",
+          "nighttemp_float": "27.0"
+        }
+      ]
+    }
+  ]
+}

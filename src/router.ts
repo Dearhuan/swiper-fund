@@ -78,6 +78,16 @@ const routes = [
     }
   },
   {
+    name: 'weather-amap',
+    path: '/weather/amap',
+    component: () => import('@/view/weather/amap.vue'),
+    meta: {
+      title: '',
+      isNeedLogin: true,
+      showTabBar: true
+    }
+  },
+  {
     name: 'oil',
     path: '/oil',
     component: () => import('@/view/oil/index.vue'),
