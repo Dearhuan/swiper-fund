@@ -12,100 +12,15 @@ const __dirname = path.dirname(__fileName)
 const rootPath = path.resolve(__dirname, './')
 const dataPath = rootPath + '/src/configs/weatherAMap.json'
 
-const data1 = {
-  "status": "1",
-  "count": "1",
-  "info": "OK",
-  "infocode": "10000",
-  "lives": [
-    {
-      "province": "广东",
-      "city": "天河区",
-      "adcode": "440106",
-      "weather": "阴",
-      "temperature": "27",
-      "winddirection": "北",
-      "windpower": "≤3",
-      "humidity": "99",
-      "reporttime": "2023-08-24 09:01:06",
-      "temperature_float": "27.0",
-      "humidity_float": "99.0"
-    }
-  ]
-}
-
-const data2 = {
-  "status": "1",
-  "count": "1",
-  "info": "OK",
-  "infocode": "10000",
-  "forecasts": [
-    {
-      "city": "天河区",
-      "adcode": "440106",
-      "province": "广东",
-      "reporttime": "2023-08-24 09:01:06",
-      "casts": [
-        {
-          "date": "2023-08-24",
-          "week": "4",
-          "dayweather": "中雨",
-          "nightweather": "雷阵雨",
-          "daytemp": "33",
-          "nighttemp": "26",
-          "daywind": "北",
-          "nightwind": "北",
-          "daypower": "≤3",
-          "nightpower": "≤3",
-          "daytemp_float": "33.0",
-          "nighttemp_float": "26.0"
-        },
-        {
-          "date": "2023-08-25",
-          "week": "5",
-          "dayweather": "雷阵雨",
-          "nightweather": "多云",
-          "daytemp": "33",
-          "nighttemp": "26",
-          "daywind": "北",
-          "nightwind": "北",
-          "daypower": "≤3",
-          "nightpower": "≤3",
-          "daytemp_float": "33.0",
-          "nighttemp_float": "26.0"
-        },
-        {
-          "date": "2023-08-26",
-          "week": "6",
-          "dayweather": "多云",
-          "nightweather": "多云",
-          "daytemp": "34",
-          "nighttemp": "26",
-          "daywind": "北",
-          "nightwind": "北",
-          "daypower": "≤3",
-          "nightpower": "≤3",
-          "daytemp_float": "34.0",
-          "nighttemp_float": "26.0"
-        },
-        {
-          "date": "2023-08-27",
-          "week": "7",
-          "dayweather": "多云",
-          "nightweather": "多云",
-          "daytemp": "35",
-          "nighttemp": "27",
-          "daywind": "北",
-          "nightwind": "北",
-          "daypower": "≤3",
-          "nightpower": "≤3",
-          "daytemp_float": "35.0",
-          "nighttemp_float": "27.0"
-        }
-      ]
-    }
-  ]
-}
+const cityCodes = [
+  '440100',
+  '110000',
+  '430400',
+  '310000',
+  '420100',
+  '460200',
+  '532901',
+]
 
 const readDataList = (path) => {
   const list = JSON.parse(fs.readFileSync(path, 'utf-8'))
@@ -138,17 +53,22 @@ const getCityWeatherInfo = (cityCode = '440106', extensions = 'base') => {
 }
 
 const handleWeatherTask = async () => {
-  const lives = await getCityWeatherInfo('440100', 'base')
-  const forecasts = await getCityWeatherInfo('440100', 'all')
-
-  const obj = readDataList(dataPath)
-  const flag = Array.isArray(lives) && lives.length > 0 && Array.isArray(forecasts) && forecasts.length > 0
-  if (flag) {
-    obj.lives = lives
-    obj.forecasts = forecasts
-
-    writeDataList(dataPath, obj)
+  const list = readDataList(dataPath)
+  for (const code of cityCodes) {
+    const lives = await getCityWeatherInfo(code, 'base')
+    const forecasts = await getCityWeatherInfo(code, 'all')
+    const flag = Array.isArray(lives) && lives.length > 0 && Array.isArray(forecasts) && forecasts.length > 0
+    if (flag) {
+      const obj = {
+        city: lives[0].city,
+        lives,
+        forecasts
+      }
+      list.unshift(obj)
+    }
   }
+  console.log(list)
+  writeDataList(dataPath, list)
 }
 
 handleWeatherTask()
