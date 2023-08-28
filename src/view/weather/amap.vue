@@ -1,11 +1,34 @@
 <template>
-  <div id="city-list" v-show="!isShowCard">
-    <div class="city-item fade-in-lt" :style="{animationDelay: `${i / (cityList.length * 5)}s`}" v-for="(city, i) in cityList" :key="i" @click="openCityInfo(city)">
+  <TimeLine v-if="monthList.length > 0 && showMonthList && !source" :time-line-list="monthList" @myClick="onClickMonth" />
+  <TimeLine v-if="dayList.length > 0 && !showMonthList && !isShowCard && !source" :time-line-list="dayList"
+    @myClick="onClickDay">
+    <template #back>
+      <div class="back-btn" @click="handleBack(-1)">
+        <svg t="1692929712045" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          p-id="2459" width="28" height="28">
+          <path
+            d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z"
+            p-id="2460" fill="#14a7ec"></path>
+        </svg>
+      </div>
+    </template>
+  </TimeLine>
+  <div id="city-list" v-show="isShowCard && !showMonthList">
+    <div class="city-item fade-in-lt" :style="{ animationDelay: `${i / (cityList.length * 5)}s` }"
+      v-for="(city, i) in cityList" :key="i" @click="openCityInfo(city)">
       <div>{{ city.name }}</div>
       <div>{{ city.date }}</div>
     </div>
+    <div class="back-btn" @click="handleBack(-2)">
+      <svg t="1692929712045" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        p-id="2459" width="28" height="28">
+        <path
+          d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z"
+          p-id="2460" fill="#14a7ec"></path>
+      </svg>
+    </div>
   </div>
-  <div id="card" class="fade-in-rt" v-if="isShowCard && source">
+  <div id="card" class="fade-in-rt" v-if="!isShowCard && !showMonthList && source">
     <div class="search-box">
       <svg t="1692759551492" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
         p-id="4171" width="16" height="16">
@@ -37,6 +60,7 @@
         <div>{{ source.base.weather }}</div>
       </div>
     </div>
+    <div id="Map"></div>
     <div class="today-detail-box">
       <div class="today-detail-title">Today Details</div>
       <div class="today-details">
@@ -49,7 +73,7 @@
           </svg>
           <div class="detail-desc">
             <div class="first-desc">{{ `${source.base.humidity}%` }}</div>
-            <div class="second-desc">湿度</div>
+            <div class="second-desc">今日湿度</div>
           </div>
         </div>
         <div class="detail-item">
@@ -64,7 +88,7 @@
           </svg>
           <div class="detail-desc">
             <div class="first-desc">{{ handleWeekNum2Text(source.forecasts[0].week) }}</div>
-            <div class="second-desc">星期</div>
+            <div class="second-desc">今日星期</div>
           </div>
         </div>
         <div class="detail-item">
@@ -154,7 +178,7 @@
           </svg>
           <div class="detail-desc">
             <div class="first-desc">{{ `${source.forecasts[0].daytemp}℃/${source.forecasts[0].nighttemp}℃` }}</div>
-            <div class="second-desc">温度</div>
+            <div class="second-desc">今日温度</div>
           </div>
         </div>
         <div class="detail-item">
@@ -166,7 +190,7 @@
           </svg>
           <div class="detail-desc">
             <div class="first-desc">{{ `${source.forecasts[0].daypower}/${source.forecasts[0].nightpower}` }}</div>
-            <div class="second-desc">风力</div>
+            <div class="second-desc">今日风力</div>
           </div>
         </div>
       </div>
@@ -182,9 +206,9 @@
         </div>
       </div>
     </div>
-    <div class="back-btn" @click="isShowCard = false">
+    <div class="back-btn" @click="handleBack(-3)">
       <svg t="1692929712045" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-        p-id="2459" width="48" height="48">
+        p-id="2459" width="28" height="28">
         <path
           d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z"
           p-id="2460" fill="#14a7ec"></path>
@@ -194,8 +218,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { handleWeatherType2Svg, handleWeekNum2Text } from '@/configs'
+import { ref, shallowRef, onMounted } from "vue";
+import TimeLine from '../../components/TimeLine/index.vue'
+import AMapLoader from '@amap/amap-jsapi-loader'
+import { handleWeatherType2Svg, handleWeekNum2Text, AMapKey, cityLocation } from '@/configs'
 import API_RESULT from '@/configs/weatherAMap.json'
 
 const source = ref()
@@ -204,19 +230,16 @@ const formatDate = (date) => {
   return date.slice(0, 11).replaceAll('-', '/')
 }
 
-const cityList = API_RESULT.map((item, i) => {
-  return {
-    name: item.city,
-    date: formatDate(item.lives[0].reporttime)
-  }
-})
+const cityList = ref([])
 
 const isShowCard = ref(false)
 const showCityName = ref('')
 
 const openCityInfo = (city) => {
+  initMap(city)
   showCityName.value = city.name
-  isShowCard.value = true
+  isShowCard.value = false
+  showMonthList.value = false
   source.value = {
     base: API_RESULT.filter(item => {
       return (item.city === city.name) && (formatDate(item.lives[0].reporttime) === city.date)
@@ -227,6 +250,108 @@ const openCityInfo = (city) => {
   }
 };
 
+const map = shallowRef(null)
+
+const initMap = (city) => {
+  const center = cityLocation.filter(item => {
+    return item.name === city.name.split('市')[0]
+  })[0].lnglat
+  AMapLoader.load({
+    key: AMapKey,
+    version: "2.0",
+    plugins: [''],
+  }).then((AMap) => {
+    map.value = new AMap.Map("Map", {
+      viewMode: "3D",
+      zoom: 9,
+      center: center,
+    });
+  }).catch(e => {
+    console.log(e);
+  })
+};
+
+const monthList = ref([]);
+
+const dayList = ref([])
+
+const onClickMonth = (info) => {
+  showMonthList.value = false
+  isShowCard.value = false
+  const arr = []
+  // 日期数据去重处理
+  API_RESULT.forEach(item => {
+    if (item.lives[0].reporttime.indexOf(info.name) > -1) {
+      arr.push(item.lives[0].reporttime.slice(5, 11))
+    }
+  })
+  dayList.value = [...new Set(arr)].map(item => {
+    return {
+      tag: {
+        type: 'day',
+        name: item
+      }
+    }
+  })
+};
+const onClickDay = (info) => {
+  showMonthList.value = false
+  isShowCard.value = true
+  cityList.value = API_RESULT.map((item, i) => {
+    return {
+      name: item.city,
+      date: formatDate(item.lives[0].reporttime)
+    }
+  }).filter(item => {
+    return item.date.slice(5).replace('/', '-') === info.name
+  })
+};
+
+const showMonthList = ref(true);
+
+const handleBack = (num) => {
+  switch (num) {
+    case -3:
+      isShowCard.value = true
+      showMonthList.value = false
+      break;
+    case -2:
+      isShowCard.value = false
+      showMonthList.value = false
+      source.value = null
+      break;
+    case -1:
+      showMonthList.value = true
+      source.value = null
+      break;
+
+    default:
+      break;
+  }
+}
+
+onMounted(() => {
+  // 月份数据去重初始化
+  const monthArr = []
+  API_RESULT.forEach(item => {
+    const reporttime = item.lives[0].reporttime.slice(0, 7)
+    monthArr.push(reporttime)
+  })
+  monthList.value = [...new Set(monthArr)].map(item => {
+    return {
+      tag: {
+        type: 'month',
+        name: item
+      }
+    }
+  })
+  cityList.value = API_RESULT.map((item, i) => {
+    return {
+      name: item.city,
+      date: formatDate(item.lives[0].reporttime)
+    }
+  })
+});
 </script>
 
 <style lang="scss" scoped>
@@ -249,19 +374,37 @@ const openCityInfo = (city) => {
     transform: translate(0);
   }
 }
+
 .fade-in-lt {
   animation: fadeIn-lt 2s;
 }
+
 .fade-in-rt {
   animation: fadeIn-rt 2s;
 }
 
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 8px 10px;
+  box-shadow: 0px 0px 5px 4px #ddd;
+  background: #fff;
+  opacity: 0.8;
+}
+
 #city-list {
+  height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  align-content: flex-start;
+  justify-content: space-between;
   gap: 20px;
   padding: 20px;
+  overflow-y: scroll;
 
   .city-item {
     color: #fff;
@@ -285,6 +428,7 @@ const openCityInfo = (city) => {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+  position: relative;
 
   .search-box {
     position: sticky;
@@ -311,6 +455,11 @@ const openCityInfo = (city) => {
   }
 
   .today-base {
+    position: absolute;
+    top: 70px;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -349,8 +498,13 @@ const openCityInfo = (city) => {
     }
   }
 
+  #Map {
+    width: 100%;
+    height: 220px;
+  }
+
   .today-detail-box {
-    padding: 20px;
+    padding: 20px 20px 0;
 
     .today-detail-title {
       font-weight: 600;
@@ -402,9 +556,10 @@ const openCityInfo = (city) => {
 
       .three-days-item {
         flex: 1;
+        font-size: 14px;
         font-weight: 600;
         text-align: center;
-        margin: 0 10px;
+        margin: 0 4px;
         padding: 20px 0;
         border: 1px solid #ddd;
         border-radius: 20px;
@@ -416,16 +571,5 @@ const openCityInfo = (city) => {
       }
     }
   }
-
-  .back-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 8px 10px;
-    box-shadow: 0px 0px 5px 4px #ddd;
-    background: #fff;
-    opacity: 0.8;
-  }
-}</style>
+}
+</style>

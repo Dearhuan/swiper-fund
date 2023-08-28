@@ -77,6 +77,10 @@ export const cityLocation = [
     lnglat: [115.2795, 25.8124]
   },
   {
+    name: '武汉',
+    lnglat: [114.3896, 30.6628]
+  },
+  {
     name: '北京',
     lnglat: [116.4551, 40.2539]
   },
