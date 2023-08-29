@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AMap: typeof import('./src/components/aMap/index.vue')['default']
+    BackToBtn: typeof import('./src/components/BackToBtn/index.vue')['default']
     CalendarBox: typeof import('./src/components/CalendarBox/index.vue')['default']
     CityMap: typeof import('./src/components/aMap/cityMap.vue')['default']
     InputNumber: typeof import('./src/components/InputNumber/index.vue')['default']

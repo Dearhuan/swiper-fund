@@ -2,6 +2,7 @@ export default {
   home: {
     Fund: 'Fund',
     Weather: 'Weather',
+    CityWeather: 'CityWeather',
     Bill: 'Bill',
     Oil: 'Oil',
     OilTool: 'OilTool',

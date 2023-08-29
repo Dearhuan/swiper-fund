@@ -6,7 +6,7 @@
         <p v-for="(text, i) in item.content" :key="i">{{ text }}</p>
       </div>
       <div v-else-if="typeof item.content == 'string'">{{ item.content }}</div>
-      <div v-if="item.tag" class="tag" @click="handleClick(item.tag)">{{ item.tag.name }}</div>
+      <div v-if="item.tag" class="tag" :class="index % 2 == 0 ? 'fade-rt' : 'fade-lt'" @click="handleClick(item.tag)">{{ item.tag.name }}</div>
       <p v-if="item.origin && !item.time">{{ item.origin }}</p>
       <p v-else-if="item.origin && item.time" v-text="`${item.origin} - ${item.time}`"></p>
       <p v-else-if="!item.origin && item.time">{{ item.time }}</p>
@@ -46,7 +46,7 @@ const props = defineProps({
 // 组件对外暴露自定义点击事件
 const emit = defineEmits(['myClick'])
 
-const handleClick = (info) => {
+const handleClick = (info: Tag) => {
   emit('myClick', info)
 }
 
@@ -59,8 +59,7 @@ $white: #ffffff;
 
 main {
   min-width: 300px;
-  padding: 20px 30px;
-  // margin: auto;
+  padding: 0 30px;
 }
 
 .timeline-three {

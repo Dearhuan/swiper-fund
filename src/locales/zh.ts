@@ -2,6 +2,7 @@ export default {
   home: {
     Fund: '基金',
     Weather: '天气',
+    CityWeather: '城市天气',
     Bill: '记账本',
     Oil: '油价',
     OilTool: '油价计算器',

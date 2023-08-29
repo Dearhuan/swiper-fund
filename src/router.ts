@@ -25,7 +25,7 @@ const routes = [
     path: '/login',
     component: () => import('@/view/login/index.vue'),
     meta: {
-      title: '登录',
+      title: '',
       isNeedLogin: false,
     }
   },
@@ -52,7 +52,7 @@ const routes = [
     path: '/fund',
     component: () => import('@/view/fund/index.vue'),
     meta: {
-      title: '基金',
+      title: '',
       isNeedLogin: true,
       showTabBar: true
     }
@@ -62,17 +62,7 @@ const routes = [
     path: '/weather',
     component: () => import('@/view/weather/index.vue'),
     meta: {
-      title: '天气',
-      isNeedLogin: true,
-      showTabBar: true
-    }
-  },
-  {
-    name: 'weather-card',
-    path: '/weather/card',
-    component: () => import('@/view/weather/cards.vue'),
-    meta: {
-      title: '天气卡',
+      title: '',
       isNeedLogin: true,
       showTabBar: true
     }
@@ -92,7 +82,7 @@ const routes = [
     path: '/oil',
     component: () => import('@/view/oil/index.vue'),
     meta: {
-      title: '油价',
+      title: '',
       isNeedLogin: true,
       showTabBar: true
     }
@@ -102,7 +92,7 @@ const routes = [
     path: '/oilTool',
     component: () => import('@/view/oilTool/index.vue'),
     meta: {
-      title: '油价计算器',
+      title: '',
       isNeedLogin: true,
       showTabBar: true
     }
@@ -112,7 +102,7 @@ const routes = [
     path: '/juhe',
     component: () => import('@/view/juhe/index.vue'),
     meta: {
-      title: '聚合',
+      title: '',
       isNeedLogin: true,
       showTabBar: true
     }

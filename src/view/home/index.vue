@@ -6,6 +6,7 @@
     <div class="flex box flex-c font-bold">
       <div class="btn fund" @click="router.push('/fund')">{{ $t('home.Fund') }}</div>
       <div class="btn weather" @click="router.push('/weather')">{{ $t('home.Weather') }}</div>
+      <div class="btn city-weather" @click="router.push('/weather/amap')">{{ $t('home.CityWeather') }}</div>
       <div class="btn oil" @click="router.push('/oil')">{{ $t('home.Oil') }}</div>
       <div class="btn oilTool" @click="router.push('/oilTool')">{{ $t('home.OilTool') }}</div>
       <div class="btn juhe" @click="router.push('/juhe')">{{ $t('home.Juhe') }}</div>
@@ -189,22 +190,26 @@ onMounted(() => {
       animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, rgb(171, 220, 255) 10%, rgb(3, 150, 255) 100%);
     }
-    .oil {
+    .city-weather {
       animation: fadeIn-lt 2s;
+      background: linear-gradient(135deg, rgb(255, 227, 171) 10%, rgb(243, 101, 189) 100%);
+    }
+    .oil {
+      animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, rgb(160, 254, 101) 10%, rgb(94, 252, 232) 100%);
     }
     .oilTool {
-      animation: fadeIn-rt 2s;
+      animation: fadeIn-lt 2s;
       background: linear-gradient(135deg, rgb(101, 200, 254) 10%, rgb(94, 252, 202) 100%);
     }
     .juhe {
-      animation: fadeIn-lt 2s;
+      animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, rgb(255, 168, 168) 10%, rgb(252, 255, 0) 100%);
     }
 
     .bill {
       text-decoration: none;
-      animation: fadeIn-rt 2s;
+      animation: fadeIn-lt 2s;
       background: linear-gradient(135deg, #BB4E75 30%, #BC78EC 100%);
     }
   }

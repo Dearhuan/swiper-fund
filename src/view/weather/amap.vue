@@ -1,34 +1,24 @@
 <template>
-  <TimeLine v-if="monthList.length > 0 && showMonthList && !source" :time-line-list="monthList" @myClick="onClickMonth" />
+  <TimeLine v-if="monthList.length > 0 && showMonthList && !source" :time-line-list="monthList" @myClick="onClickMonth">
+    <template #back>
+      <BackToBtn @myClick="handleBack(0)" />
+    </template>
+  </TimeLine>
   <TimeLine v-if="dayList.length > 0 && !showMonthList && !isShowCard && !source" :time-line-list="dayList"
     @myClick="onClickDay">
     <template #back>
-      <div class="back-btn" @click="handleBack(-1)">
-        <svg t="1692929712045" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-          p-id="2459" width="28" height="28">
-          <path
-            d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z"
-            p-id="2460" fill="#14a7ec"></path>
-        </svg>
-      </div>
+      <BackToBtn @myClick="handleBack(-1)" />
     </template>
   </TimeLine>
   <div id="city-list" v-show="isShowCard && !showMonthList">
-    <div class="city-item fade-in-lt" :style="{ animationDelay: `${i / (cityList.length * 5)}s` }"
+    <div class="city-item fade-lt" :style="{ animationDelay: `${i / (cityList.length * 5)}s` }"
       v-for="(city, i) in cityList" :key="i" @click="openCityInfo(city)">
       <div>{{ city.name }}</div>
       <div>{{ city.date }}</div>
     </div>
-    <div class="back-btn" @click="handleBack(-2)">
-      <svg t="1692929712045" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-        p-id="2459" width="28" height="28">
-        <path
-          d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z"
-          p-id="2460" fill="#14a7ec"></path>
-      </svg>
-    </div>
+    <BackToBtn @myClick="handleBack(-2)" />
   </div>
-  <div id="card" class="fade-in-rt" v-if="!isShowCard && !showMonthList && source">
+  <div id="card" class="fade-rt" v-if="!isShowCard && !showMonthList && source">
     <div class="search-box">
       <svg t="1692759551492" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
         p-id="4171" width="16" height="16">
@@ -60,7 +50,7 @@
         <div>{{ source.base.weather }}</div>
       </div>
     </div>
-    <div id="Map"></div>
+    <CityMap :city="showCityName.split('市')[0]"/>
     <div class="today-detail-box">
       <div class="today-detail-title">Today Details</div>
       <div class="today-details">
@@ -206,23 +196,20 @@
         </div>
       </div>
     </div>
-    <div class="back-btn" @click="handleBack(-3)">
-      <svg t="1692929712045" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-        p-id="2459" width="28" height="28">
-        <path
-          d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z"
-          p-id="2460" fill="#14a7ec"></path>
-      </svg>
-    </div>
+    <BackToBtn @myClick="handleBack(-3)" />
   </div>
 </template>
 
 <script setup>
-import { ref, shallowRef, onMounted } from "vue";
-import TimeLine from '../../components/TimeLine/index.vue'
-import AMapLoader from '@amap/amap-jsapi-loader'
-import { handleWeatherType2Svg, handleWeekNum2Text, AMapKey, cityLocation } from '@/configs'
+import { ref, onMounted } from "vue";
+import { useRouter } from 'vue-router'
+import TimeLine from '@/components/TimeLine/index.vue'
+import BackToBtn from '@/components/BackToBtn/index.vue'
+import CityMap from '@/components/aMap/cityMap.vue'
+import { handleWeatherType2Svg, handleWeekNum2Text } from '@/configs'
 import API_RESULT from '@/configs/weatherAMap.json'
+
+const router = useRouter()
 
 const source = ref()
 
@@ -235,8 +222,8 @@ const cityList = ref([])
 const isShowCard = ref(false)
 const showCityName = ref('')
 
+
 const openCityInfo = (city) => {
-  initMap(city)
   showCityName.value = city.name
   isShowCard.value = false
   showMonthList.value = false
@@ -248,27 +235,6 @@ const openCityInfo = (city) => {
       return (item.city === city.name) && (formatDate(item.lives[0].reporttime) === city.date)
     })[0].forecasts[0].casts
   }
-};
-
-const map = shallowRef(null)
-
-const initMap = (city) => {
-  const center = cityLocation.filter(item => {
-    return item.name === city.name.split('市')[0]
-  })[0].lnglat
-  AMapLoader.load({
-    key: AMapKey,
-    version: "2.0",
-    plugins: [''],
-  }).then((AMap) => {
-    map.value = new AMap.Map("Map", {
-      viewMode: "3D",
-      zoom: 9,
-      center: center,
-    });
-  }).catch(e => {
-    console.log(e);
-  })
 };
 
 const monthList = ref([]);
@@ -324,6 +290,8 @@ const handleBack = (num) => {
       showMonthList.value = true
       source.value = null
       break;
+    case 0:
+      router.push('/home')
 
     default:
       break;
@@ -355,46 +323,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@keyframes fadeIn-lt {
-  from {
-    transform: translate(-50vw);
-  }
-
-  to {
-    transform: translate(0);
-  }
-}
-
-@keyframes fadeIn-rt {
-  from {
-    transform: translate(50vw);
-  }
-
-  to {
-    transform: translate(0);
-  }
-}
-
-.fade-in-lt {
-  animation: fadeIn-lt 2s;
-}
-
-.fade-in-rt {
-  animation: fadeIn-rt 2s;
-}
-
-.back-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 8px 10px;
-  box-shadow: 0px 0px 5px 4px #ddd;
-  background: #fff;
-  opacity: 0.8;
-}
-
 #city-list {
   height: 100vh;
   box-sizing: border-box;
@@ -415,9 +343,9 @@ onMounted(() => {
     flex-direction: column;
     align-items: center;
     width: 40vw;
-    padding: 6px 0;
+    padding: 40px 0;
     border: 1px solid #ddd;
-    border-radius: 63px;
+    border-radius: 20px;
     box-shadow: 4px 6px 5px 4px #ddd;
   }
 }
