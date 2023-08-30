@@ -184,6 +184,15 @@ export const clipboardImg = (html: HTMLImageElement) => {
 
 export const randomNum = (min: any, max: any) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+// 获取随机16进制颜色
+export const getRandomColor = () => {
+  let r = Math.floor(Math.random()*256);
+  let g = Math.floor(Math.random()*256);
+  let b = Math.floor(Math.random()*256);
+  let color = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+  return color;
+}
+
 export const setCookie = (key: string, value: string, expire: number) => {
   try {
     const d = new Date();

@@ -115,6 +115,14 @@ const routes = [
       isNeedLogin: true
     }
   },
+  {
+    name: 'menu',
+    path: '/menu',
+    component: () => import('@/view/menu/index.vue'),
+    meta: {
+      isNeedLogin: false
+    }
+  },
 ]
 
 const router = createRouter({

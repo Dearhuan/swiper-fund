@@ -466,3 +466,317 @@ export const handleWeekNum2Text = (weekNum = '1') => {
   }
   return weekText
 }
+
+export const menuList = [
+  {
+    type: '湘菜',
+    name: '剁椒鱼头'
+  },
+  {
+    type: '湘菜',
+    name: '辣椒炒肉'
+  },
+  {
+    type: '湘菜',
+    name: '小炒黄牛肉'
+  },
+  {
+    type: '湘菜',
+    name: '毛氏红烧肉'
+  },
+  {
+    type: '湘菜',
+    name: '东安子鸡'
+  },
+  {
+    type: '湘菜',
+    name: '麻仁香酥鸭'
+  },
+  {
+    type: '湘菜',
+    name: '腊味合蒸'
+  },
+  {
+    type: '湘菜',
+    name: '永安血鸭'
+  },
+  {
+    type: '湘菜',
+    name: '湘西外婆菜'
+  },
+  {
+    type: '湘菜',
+    name: '干锅肥肠'
+  },
+  {
+    type: '湘菜',
+    name: '擂辣椒皮蛋'
+  },
+  {
+    type: '湘菜',
+    name: '小炒肉'
+  },
+  {
+    type: '湘菜',
+    name: '啤酒鸭'
+  },
+  {
+    type: '湘菜',
+    name: '土匪猪肝'
+  },
+  {
+    type: '湘菜',
+    name: '浏阳蒸鸡蛋'
+  },
+  {
+    type: '湘菜',
+    name: '湘西酸肉'
+  },
+  {
+    type: '湘菜',
+    name: '邵阳猪血丸子'
+  },
+  {
+    type: '湘菜',
+    name: '长沙霸王别姬'
+  },
+  {
+    type: '湘菜',
+    name: '口味虾'
+  },
+  {
+    type: '湘菜',
+    name: '酱板鸭'
+  },
+  {
+    type: '湘菜',
+    name: '临武鸭'
+  },
+  {
+    type: '湘菜',
+    name: '枸杞煲猪手'
+  },
+  {
+    type: '湘菜',
+    name: '虎皮扣肉'
+  },
+  {
+    type: '湘菜',
+    name: '攸县香干'
+  },
+  {
+    type: '湘菜',
+    name: '红烧甲鱼'
+  },
+  {
+    type: '湘菜',
+    name: '祁阳嗦螺'
+  },
+  {
+    type: '湘菜',
+    name: '冬笋炒腊肉'
+  },
+  {
+    type: '湘菜',
+    name: '黄鸭叫'
+  },
+  {
+    type: '湘菜',
+    name: '长沙臭豆腐'
+  },
+  {
+    type: '川菜',
+    name: '四川火锅'
+  },
+  {
+    type: '川菜',
+    name: '水煮鱼'
+  },
+  {
+    type: '川菜',
+    name: '回锅肉'
+  },
+  {
+    type: '川菜',
+    name: '麻婆豆腐'
+  },
+  {
+    type: '川菜',
+    name: '鱼香肉丝'
+  },
+  {
+    type: '川菜',
+    name: '水煮肉片'
+  },
+  {
+    type: '川菜',
+    name: '辣子鸡'
+  },
+  {
+    type: '川菜',
+    name: '酸菜鱼'
+  },
+  {
+    type: '川菜',
+    name: '宫保鸡丁'
+  },
+  {
+    type: '川菜',
+    name: '毛血旺'
+  },
+  {
+    type: '川菜',
+    name: '东坡肘子'
+  },
+  {
+    type: '川菜',
+    name: '东坡肉'
+  },
+  {
+    type: '川菜',
+    name: '泡椒凤爪'
+  },
+  {
+    type: '川菜',
+    name: '口水鸡'
+  },
+  {
+    type: '川菜',
+    name: '尖椒炒牛肉'
+  },
+  {
+    type: '川菜',
+    name: '太白鸭'
+  },
+  {
+    type: '川菜',
+    name: '石锅脑花'
+  },
+  {
+    type: '川菜',
+    name: '卤冒三嫩'
+  },
+  {
+    type: '川菜',
+    name: '铁板鸭掌'
+  },
+  {
+    type: '川菜',
+    name: '蚂蚁上树'
+  },
+  {
+    type: '川菜',
+    name: '酸汤肥牛'
+  },
+  {
+    type: '川菜',
+    name: '梅菜扣肉'
+  },
+  {
+    type: '川菜',
+    name: '粉蒸肉'
+  },
+  {
+    type: '川菜',
+    name: '金汤猪肚'
+  },
+  {
+    type: '川菜',
+    name: '糯米排骨'
+  },
+  {
+    type: '川菜',
+    name: '酱汁牛排'
+  },
+  {
+    type: '粤菜',
+    name: '极品烧鹅皇'
+  },
+  {
+    type: '粤菜',
+    name: '金堂羊肚菌'
+  },
+  {
+    type: '粤菜',
+    name: '广式烤乳猪'
+  },
+  {
+    type: '粤菜',
+    name: '白切鸡'
+  },
+  {
+    type: '粤菜',
+    name: '脆皮烧鹅'
+  },
+  {
+    type: '粤菜',
+    name: '双皮奶'
+  },
+  {
+    type: '粤菜',
+    name: '冷水猪肚'
+  },
+  {
+    type: '粤菜',
+    name: '粤式牛仔粒'
+  },
+]
+
+export const descList = [
+  {
+    descLt: '今天吃',
+    descRt: '好吗？',
+  },
+  {
+    descLt: '今天吃',
+    descRt: '怎么样？',
+  },
+  {
+    descLt: '今天吃',
+    descRt: '吧？',
+  },
+  {
+    descLt: '不如吃',
+    descRt: '吧？',
+  },
+  {
+    descLt: '来一口',
+    descRt: '很香吧？',
+  },
+  {
+    descLt: '听说',
+    descRt: '好吃极了',
+  },
+  {
+    descLt: '听说',
+    descRt: '很美味',
+  },
+  {
+    descLt: '老天爷说',
+    descRt: '好吃到爆',
+  },
+  {
+    descLt: '摇到',
+    descRt: '我就去',
+  },
+  {
+    descLt: '随到',
+    descRt: '我吃两碗',
+  },
+  {
+    descLt: '如果是',
+    descRt: '我吃三碗',
+  },
+  {
+    descLt: '来一个',
+    descRt: '绝绝子',
+  },
+  {
+    descLt: '就',
+    descRt: '了',
+  },
+  {
+    descLt: '不是',
+    descRt: '我吃翔',
+  },
+]
