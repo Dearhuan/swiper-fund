@@ -7,6 +7,7 @@ export default {
     Oil: 'Oil',
     OilTool: 'OilTool',
     Juhe: 'Aggregation',
+    Menu: 'Menu',
   },
   weather: {
     today: 'Today',

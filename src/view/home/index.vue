@@ -10,6 +10,7 @@
       <div class="btn oil" @click="router.push('/oil')">{{ $t('home.Oil') }}</div>
       <div class="btn oilTool" @click="router.push('/oilTool')">{{ $t('home.OilTool') }}</div>
       <div class="btn juhe" @click="router.push('/juhe')">{{ $t('home.Juhe') }}</div>
+      <div class="btn menu" @click="router.push('/menu')">{{ $t('home.Menu') }}</div>
       <a class="btn bill" href="https://dearhuan.gitee.io/vip/#/home">{{ $t('home.Bill') }}</a>
     </div>
     <div class="locale">
@@ -183,12 +184,12 @@ onMounted(() => {
 
     .fund {
       animation: fadeIn-lt 2s;
-      background: linear-gradient(135deg, rgb(255 198 0) 10%, rgb(255 8 107) 100%);
+      background: linear-gradient(135deg, rgb(241 209 96) 10%, rgb(244 27 247) 100%);
     }
 
     .weather {
       animation: fadeIn-rt 2s;
-      background: linear-gradient(135deg, rgb(171, 220, 255) 10%, rgb(3, 150, 255) 100%);
+      background: linear-gradient(135deg, rgb(54 147 214) 10%, rgb(232 255 3) 100%);
     }
     .city-weather {
       animation: fadeIn-lt 2s;
@@ -206,10 +207,14 @@ onMounted(() => {
       animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, rgb(255, 168, 168) 10%, rgb(252, 255, 0) 100%);
     }
+    .menu {
+      animation: fadeIn-lt 2s;
+      background: linear-gradient(135deg, rgb(17 60 113) 10%, rgb(150 152 226) 100%);
+    }
 
     .bill {
       text-decoration: none;
-      animation: fadeIn-lt 2s;
+      animation: fadeIn-rt 2s;
       background: linear-gradient(135deg, #BB4E75 30%, #BC78EC 100%);
     }
   }

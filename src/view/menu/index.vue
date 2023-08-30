@@ -1,34 +1,34 @@
 <template>
   <div class="eat-container flex flex-column flex-c">
-    <div class="top-box">
+    <div class="top-box fade-bottom">
       <div class="top-desc font-bold text-c">【{{ descLt }}<span style="opacity: 0;">】</span></div>
-      <div class="top-center-box">
-        <div class="row"></div>
-        <div class="col"></div>
+      <div class="top-center-box" :style="{ borderColor: isOnGoing ? '#e72a69' : '#14a7ec' }">
+        <div class="row" :style="{ background: isOnGoing ? '#e72a69' : '#14a7ec' }"></div>
+        <div class="col" :style="{ background: isOnGoing ? '#e72a69' : '#14a7ec' }"></div>
         <div class="content animate-text font-big font-bold flex flex-c">{{ dish.name }}</div>
       </div>
       <div class="top-desc font-bold text-c"><span style="opacity: 0;">【</span>{{ descRt }}】</div>
     </div>
     <div class="display-box"></div>
-    <div class="action-box" @click="handleAction">{{ actionFlag }}</div>
+    <div class="action-box fade-top" :style="{ background: isOnGoing ? '#e72a69' : '#14a7ec' }" @click="handleAction">{{ actionFlag }}</div>
   </div>
   <div class="foods-container">
     <div class="foods flex">
       <div class="food-item" :style="{ color: getRandomColor() }" v-for="(item, i) in menuList" :key="i">{{ item.name }}
       </div>
     </div>
-    <div class="hedge hedge-lt"></div>
-    <div class="hedge hedge-rt"></div>
-    <div class="hedge hedge-rb"></div>
-    <div class="hedge hedge-lb"></div>
-    <div class="oblique">
+    <div class="hedge hedge-lt fade-rt"></div>
+    <div class="hedge hedge-rt fade-lt"></div>
+    <div class="hedge hedge-rb fade-lt"></div>
+    <div class="hedge hedge-lb fade-rt"></div>
+    <div class="oblique fade-lt">
       <div class="oblique-item"></div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { randomNum, getRandomColor } from '@/utils'
 import { menuList, descList } from '@/configs'
 
@@ -57,7 +57,7 @@ const actionFlag = ref('开始')
 const isOnGoing = ref(false)
 const timer = ref(null)
 
-// 开始/结束动作
+// 开始/停动作
 const handleAction = () => {
   if (isOnGoing.value && timer.value) {
     clearInterval(timer.value)
@@ -67,7 +67,7 @@ const handleAction = () => {
   }
   getRandomDesc()
   isOnGoing.value = true
-  actionFlag.value = '结束'
+  actionFlag.value = '停'
   timer.value = setInterval(() => {
     getRandomDish()
   }, 20)
@@ -75,6 +75,10 @@ const handleAction = () => {
 
 onMounted(() => {
   getRandomDesc()
+});
+
+onUnmounted(() => {
+  timer.value && clearInterval(timer.value)
 });
 </script>
 

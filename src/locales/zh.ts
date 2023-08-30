@@ -1,12 +1,13 @@
 export default {
   home: {
-    Fund: '基金',
-    Weather: '天气',
-    CityWeather: '城市天气',
-    Bill: '记账本',
-    Oil: '油价',
-    OilTool: '油价计算器',
-    Juhe: '聚合',
+    Fund: '基金涨了吗',
+    Weather: '天气怎么样',
+    CityWeather: '天气时间轴',
+    Bill: '记记账呗',
+    Oil: '油价跌了吗',
+    OilTool: '油价算一算',
+    Juhe: '聚合数据',
+    Menu: '今天吃什么',
   },
   weather: {
     today: '今天',
