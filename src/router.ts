@@ -29,15 +29,15 @@ const routes = [
       isNeedLogin: false,
     }
   },
-  // {
-  //   name: 'test',
-  //   path: '/test',
-  //   component: () => import('@/view/test/index.vue'),
-  //   meta: {
-  //     title: '测试',
-  //     isNeedLogin: false,
-  //   }
-  // },
+  {
+    name: 'test',
+    path: '/test',
+    component: () => import('@/view/test/index.vue'),
+    meta: {
+      title: '测试',
+      isNeedLogin: false,
+    }
+  },
   {
     name: 'home',
     path: '/home',
