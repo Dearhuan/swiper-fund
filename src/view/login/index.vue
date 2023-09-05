@@ -96,7 +96,7 @@ watch([defaultQuestionIndex], () => {
     setTimeout(() => {
       setCookie('isLogin', '1', 1)
       router.push('/home')
-    }, 2000);
+    }, 200);
   }
 })
 </script>
