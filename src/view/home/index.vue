@@ -95,7 +95,7 @@ onMounted(() => {
             lineWidth: 1
           },
           keyframeAnimation: {
-            duration: 3000,
+            duration: 1000,
             loop: false,
             keyframes: [
               {
@@ -128,7 +128,7 @@ onMounted(() => {
   setOption(option)
   setTimeout(() => {
     isShowStroke.value = false
-  }, 3000);
+  }, 1000);
 })
 </script>
 

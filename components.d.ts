@@ -15,8 +15,6 @@ declare module '@vue/runtime-core' {
     OilPriceCalculator: typeof import('./src/components/OilPriceCalculator/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Test: typeof import('./src/components/test/index.vue')['default']
     TimeLine: typeof import('./src/components/TimeLine/index.vue')['default']
-    Year: typeof import('./src/components/Year/index.vue')['default']
   }
 }

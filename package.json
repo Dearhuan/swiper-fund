@@ -9,6 +9,9 @@
     "actionBuild": "vite build",
     "preview": "vite preview"
   },
+  "resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+  },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@vueuse/core": "^9.13.0",
@@ -32,6 +35,7 @@
     "typescript": "^4.6.4",
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.0",
+    "vite-plugin-imagemin": "^0.6.1",
     "vue-router": "4",
     "vue-tsc": "^0.38.4"
   }

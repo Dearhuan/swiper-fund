@@ -1,8 +1,8 @@
 <template>
   <div id="login">
     <div id="cover" v-if="showCover">
-      <img class="cover" src="../../assets/images/cute_jay.webp" alt="">
-      <img class="cover" src="../../assets/images/cute_jay.webp" alt="">
+      <img class="cover" src="../../assets/images/cute_jay.png" alt="">
+      <img class="cover" src="../../assets/images/cute_jay.png" alt="">
     </div>
     <div class="login" v-else>
       <div class="login-bg">
@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { randomNum, setCookie } from '@/utils'
+import { randomNum, setCookie, getCookie } from '@/utils'
 import { useMessage } from '@/utils/useMessage'
 import { QuestionAndAnswers } from '@/configs'
 import { QuestionAndAnswer } from '@/types'
@@ -61,6 +61,8 @@ const questionAndAnswers = ref<Array<QuestionAndAnswer>>([])
 let list = QuestionAndAnswers
 
 onMounted(() => {
+  const isLogin = getCookie('isLogin')
+  isLogin == '1' && router.push('/home')
   setTimeout(() => {
     showCover.value = false
   }, 2000);
