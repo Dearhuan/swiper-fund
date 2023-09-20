@@ -4,7 +4,7 @@ const APPID = 'wx8aa79622b548aba2'
 
 const APPSECRET = '475bccc49e499619a83cce8a0e236562'
 
-const TEMPLATE_ID = 'B_8giUdZtFl45QZUGkxX2i7VbWwLQLHXp0own2AcLwg'
+const TEMPLATE_ID = '_SP9V1PxdJczVTHmehAEYB4-OS7--gsURkCucImKMCY'
 
 let ACCESS_TOKEN
 
