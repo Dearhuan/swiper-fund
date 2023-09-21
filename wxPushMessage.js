@@ -4,6 +4,8 @@ const APPID = 'wx8aa79622b548aba2'
 
 const APPSECRET = '475bccc49e499619a83cce8a0e236562'
 
+const USER_ID = 'oN_Np67LMDL4EE4yCSWVQB2SwoFs'
+
 const TEMPLATE_ID = '_SP9V1PxdJczVTHmehAEYB4-OS7--gsURkCucImKMCY'
 
 let ACCESS_TOKEN
@@ -50,14 +52,15 @@ const getOpenId = async () => {
 // 第三步，获取数据
 
 // 第四步，发送模板消息
-const sendTemplateMsg = (openId) => {
+const sendTemplateMsg = async () => {
+  ACCESS_TOKEN = await getAccessToken()
   const url = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${ACCESS_TOKEN}`
   return new Promise((resolve, reject) => {
     axios.request({
       url,
       method: 'POST',
       params: {
-        touser: openId,
+        touser: USER_ID,
         template_id: TEMPLATE_ID,
         url: 'http://weixin.qq.com/download',
         data: {
@@ -80,8 +83,4 @@ const sendTemplateMsg = (openId) => {
   })
 }
 
-const pushWxTemplateMsg = () => {
-  getOpenId()
-}
-
-pushWxTemplateMsg()
+sendTemplateMsg()
