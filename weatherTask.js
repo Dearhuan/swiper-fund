@@ -163,19 +163,19 @@ const getWeather = async (city, location) => {
       value: addressText
     },
     keyword2: {
-      value: Temp
+      value: nowInfo.Temp
     },
     keyword3: {
-      value: Humidity
+      value: nowInfo.Humidity
     },
     keyword4: {
-      value: Wind
+      value: nowInfo.Wind
     },
     keyword5: {
-      value: FreshText
+      value: nowInfo.FreshText
     },
     keyword6: {
-      value: weatherTip
+      value: nowInfo.weatherTip
     },
   }).catch(err => {
     throw new Error('send template msg error.')
