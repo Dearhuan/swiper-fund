@@ -19,7 +19,7 @@ const getAccessToken = () => {
       method: 'GET',
       url: GET_ACCESS_TOKEN_URL
     }).then(res => {
-      console.log(res, '---')
+      console.log(res.data, '---')
       res.data.access_token ? 
         resolve(res.data.access_token) :
         reject(res.data.errmsg)
@@ -74,7 +74,7 @@ const sendTemplateMsg = async () => {
         },
       }
     }).then(res => {
-      console.log(res, '===')
+      console.log(res.data, '===')
       res.data.errcode == 0 ? resolve('ok') : reject('failed')
     }).catch(err => {
       console.log(err)

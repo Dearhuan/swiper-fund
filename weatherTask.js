@@ -4,6 +4,52 @@ import { fileURLToPath } from 'url'
 import cheerio from 'cheerio'
 import superagent from 'superagent'
 
+const APPID = 'wx8aa79622b548aba2'
+
+const APPSECRET = '475bccc49e499619a83cce8a0e236562'
+
+const USER_ID = 'oN_Np67LMDL4EE4yCSWVQB2SwoFs'
+
+const TEMPLATE_ID = 'BZvsvNhkEax07kEw8P-Rmxxqt7mWLqJRQiejI2RuFJ0'
+
+let ACCESS_TOKEN
+
+// 第一步，获取ACCESS_TOKEN
+const GET_ACCESS_TOKEN_URL = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`
+
+const getAccessToken = () => {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      method: 'GET',
+      url: GET_ACCESS_TOKEN_URL
+    }).then(res => {
+      console.log(res.data)
+      res.data.access_token ? 
+        resolve(res.data.access_token) :
+        reject(res.data.errmsg)
+    }).catch(err => {
+      console.log(err)
+    })
+  })
+}
+
+const sendTemplateMsg = async (data) => {
+  const url = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${ACCESS_TOKEN}`
+  return new Promise((resolve, reject) => {
+    axios.post(url, {
+      touser: USER_ID,
+      template_id: TEMPLATE_ID,
+      url: 'http://weixin.qq.com/download',
+      data: data
+    }).then(res => {
+      console.log(res.data, '===')
+      res.data.errcode == 0 ? resolve('ok') : reject('failed')
+    }).catch(err => {
+      console.log(err)
+    })
+  })
+}
+
 const mojiUrl = "https://tianqi.moji.com/weather/china/";
 
 const __fileName = fileURLToPath(import.meta.url)
@@ -111,6 +157,29 @@ const getWeather = async (city, location) => {
     Wind: $(".wea_about.clearfix").find("em").text(),
   };
 
+  sendTemplateMsg({
+    keyword1: {
+      value: addressText
+    },
+    keyword2: {
+      value: Temp
+    },
+    keyword3: {
+      value: Humidity
+    },
+    keyword4: {
+      value: Wind
+    },
+    keyword5: {
+      value: FreshText
+    },
+    keyword6: {
+      value: weatherTip
+    },
+  }).catch(err => {
+    throw new Error('send template msg error.')
+  })
+
   let threeDaysData = [];
 
   $(".forecast .days").each(function (i, elem) {
@@ -147,6 +216,8 @@ const getNowSeconds = () => {
 
 // 数据组装&写入JSON
 const makeUpInfo = async (cityList) => {
+  ACCESS_TOKEN = await getAccessToken()
+  console.log({ACCESS_TOKEN})
   const date = dateFormater('YYYY-MM-DD', getNowSeconds())
 
   const dataList = []
