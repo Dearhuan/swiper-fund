@@ -58,24 +58,20 @@ const sendTemplateMsg = async () => {
   console.log({ACCESS_TOKEN})
   const url = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${ACCESS_TOKEN}`
   return new Promise((resolve, reject) => {
-    axios.request({
-      url,
-      method: 'POST',
-      params: {
-        touser: USER_ID,
-        template_id: TEMPLATE_ID,
-        url: 'http://weixin.qq.com/download',
-        data: {
-          keyword1: {
-            value: '巧克力'
-          },
-          keyword2: {
-            value: '39.8元'
-          },
-          keyword3: {
-            value: '2014年9月22日'
-          },
-        }
+    axios.post(url, {
+      touser: USER_ID,
+      template_id: TEMPLATE_ID,
+      url: 'http://weixin.qq.com/download',
+      data: {
+        keyword1: {
+          value: '巧克力'
+        },
+        keyword2: {
+          value: '39.8元'
+        },
+        keyword3: {
+          value: '2014年9月22日'
+        },
       }
     }).then(res => {
       console.log(res, '===')
