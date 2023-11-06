@@ -1,0 +1,23 @@
+name: wxPushMessage
+on:
+  workflow_dispatch:
+  schedule:
+    #时间格式 minute hour day month week 设置的时间是UTC 不是北京时间
+    - cron: "0 2 * * *"
+
+jobs:
+  start:
+    # 运行环境为最新版的Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3 
+
+      #安装node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Start task
+        run: node wxPushMessage.js
