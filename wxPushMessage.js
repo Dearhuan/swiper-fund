@@ -19,6 +19,7 @@ const getAccessToken = () => {
       method: 'GET',
       url: GET_ACCESS_TOKEN_URL
     }).then(res => {
+      console.log(res, '---')
       res.data.access_token ? 
         resolve(res.data.access_token) :
         reject(res.data.errmsg)
@@ -54,6 +55,7 @@ const getOpenId = async () => {
 // 第四步，发送模板消息
 const sendTemplateMsg = async () => {
   ACCESS_TOKEN = await getAccessToken()
+  console.log({ACCESS_TOKEN})
   const url = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${ACCESS_TOKEN}`
   return new Promise((resolve, reject) => {
     axios.request({
@@ -76,6 +78,7 @@ const sendTemplateMsg = async () => {
         }
       }
     }).then(res => {
+      console.log(res, '===')
       res.data.errcode == 0 ? resolve('ok') : reject('failed')
     }).catch(err => {
       console.log(err)
@@ -83,4 +86,6 @@ const sendTemplateMsg = async () => {
   })
 }
 
-sendTemplateMsg()
+sendTemplateMsg().catch(err => {
+  throw new Error('send template msg failed')
+})
