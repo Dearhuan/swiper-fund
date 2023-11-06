@@ -19,5 +19,9 @@ jobs:
         with:
           node-version: '16'
       
+      #安装依赖
+      - name: package install
+        run: npm install
+      
       - name: Start task
         run: node wxPushMessage.js
