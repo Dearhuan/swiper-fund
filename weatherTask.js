@@ -160,22 +160,28 @@ const getWeather = async (city, location) => {
 
   sendTemplateMsg({
     keyword1: {
-      value: addressText
+      value: addressText,
+      color: '#65c8fe'
     },
     keyword2: {
-      value: nowInfo.Temp
+      value: nowInfo.Temp,
+      color: '#5efcca'
     },
     keyword3: {
-      value: nowInfo.Humidity
+      value: nowInfo.Humidity,
+      color: '#113c71'
     },
     keyword4: {
-      value: nowInfo.Wind
+      value: nowInfo.Wind,
+      color: '#9698e2'
     },
     keyword5: {
-      value: nowInfo.FreshText
+      value: nowInfo.FreshText,
+      color: '#BB4E75'
     },
     keyword6: {
-      value: nowInfo.weatherTip
+      value: nowInfo.weatherTip,
+      color: '#BC78EC'
     },
   }).catch(err => {
     throw new Error('send template msg error.')

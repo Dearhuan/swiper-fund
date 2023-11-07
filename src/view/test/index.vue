@@ -84,8 +84,8 @@ const getImageFromLocal = async (e: Event) => {
   }
 }
 
-let s = ''
-document.querySelector('#Q5t3T').querySelector('table').querySelectorAll('tr').forEach((item, i) => {
+let s = '';
+(document?.querySelector('#Q5t3T')?.querySelector('table') as HTMLElement).querySelectorAll('tr').forEach((item, i) => {
   let str = ''
   item.querySelectorAll('td').forEach(td => {
     const hasText = td.innerText.trim().length > 0
