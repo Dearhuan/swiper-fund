@@ -31,48 +31,42 @@ const writeDataList = (path, data) => {
   fs.writeFileSync(path, JSON.stringify(data))
 }
 
-const buildRequestUrl = (cityCode = '440106', extensions = 'base') => {
-  const validExtensions = ['base', 'all']
-  extensions = validExtensions.includes(extensions) ? extensions : 'base'
-  return `${BASE_URL}?key=${API_KEY}&city=${cityCode}&extensions=${extensions}`
-}
-
-const getCityWeatherInfo = async (cityCode, extensions) => {
-  try {
-    const requestUrl = buildRequestUrl(cityCode, extensions)
-    const response = await axios.get(requestUrl)
-
-    if (response.data.status === '1') {
-      return extensions === 'base' ? response.data.lives : response.data.forecasts
-    } else {
-      return []
-    }
-  } catch (error) {
-    console.log(`Error`, error)
-    return []
+const getCityWeatherInfo = (cityCode = '440106', extensions = 'base') => {
+  if (!['base', 'all'].includes(extensions)) {
+    extensions = 'base'
   }
+  const requestUrl = `${BASE_URL}?key=${API_KEY}&city=${cityCode}&extensions=${extensions}`
+  return new Promise((resolve, reject) => {
+    axios.request({
+      method: 'GET',
+      url: requestUrl
+    }).then(res => {
+      res.data.status === '1' ? 
+        extensions === 'base' ? 
+          resolve(res.data.lives) :
+          resolve(res.data.forecasts) :
+        resolve([])
+    }).catch(err => {
+      console.log(err)
+    })
+  })
 }
 
 const handleWeatherTask = async () => {
   const list = readDataList(dataPath)
-
-  const tasks = cityCodes.map(async (code) => {
+  for (const code of cityCodes) {
     const lives = await getCityWeatherInfo(code, 'base')
     const forecasts = await getCityWeatherInfo(code, 'all')
-
-    if (Array.isArray(lives) && lives.length > 0 && Array.isArray(forecasts) && forecasts.length > 0) {
-      return {
+    const flag = Array.isArray(lives) && lives.length > 0 && Array.isArray(forecasts) && forecasts.length > 0
+    if (flag) {
+      const obj = {
         city: lives[0].city,
         lives,
         forecasts
       }
+      list.unshift(obj)
     }
-    return null
-  })
-
-  const results = Promise.all(tasks)
-  const filterRes = results.filter(item => item !== null)
-  list.unshift(...filterRes)
+  }
   console.log(list)
   writeDataList(dataPath, list)
 }
