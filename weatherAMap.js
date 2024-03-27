@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 
 const BASE_URL = 'https://restapi.amap.com/v3/weather/weatherInfo'
 
-const API_KEY = '59714288c3d6b725bb8e3776c00b272a'
+const API_KEY = '7cf462871b3affd96b529a2032227f59'
 
 const __fileName = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__fileName)
