@@ -28,7 +28,7 @@
       </svg>
       <input type="text" placeholder="Search Location">
     </div>
-    <div class="today-base">
+    <div class="today-base" @click="handleRouteJump()">
       <div class="base-location">
         <svg t="1692759754982" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
           p-id="13356" width="20" height="20">
@@ -203,6 +203,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from 'vue-router'
+import { useStore } from "@/store";
 import TimeLine from '@/components/TimeLine/index.vue'
 import BackToBtn from '@/components/BackToBtn/index.vue'
 import CityMap from '@/components/aMap/cityMap.vue'
@@ -210,6 +211,8 @@ import { handleWeatherType2Svg, handleWeekNum2Text } from '@/configs'
 import API_RESULT from '@/configs/weatherAMap.json'
 
 const router = useRouter()
+
+const store = useStore()
 
 const source = ref()
 
@@ -296,6 +299,10 @@ const handleBack = (num) => {
     default:
       break;
   }
+}
+
+const handleRouteJump = () => {
+  location.href = store.routeURI
 }
 
 onMounted(() => {

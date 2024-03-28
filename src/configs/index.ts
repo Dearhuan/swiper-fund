@@ -63,6 +63,8 @@ export const bgColors = [
 
 export const AMapKey = '00e335f384375d099d9ef1124b3bf770'
 
+export const SecurityJsCode = '8447c790b7c1df254ee1c18ab3f14056'
+
 export const cityLocation = [
   {
     name: '广州',

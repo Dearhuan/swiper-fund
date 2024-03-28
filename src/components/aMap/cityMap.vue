@@ -3,18 +3,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { AMapKey, cityLocation } from '@/configs'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useStore } from '@/store'
+import { AMapKey, SecurityJsCode, cityLocation } from '@/configs'
 import AMapLoader from '@amap/amap-jsapi-loader'
 
-const cityMap = ref(null)
+let cityMap: { destroy: () => void } | null = null
 
+window['_AMapSecurityConfig'] = {
+  securityJsCode: SecurityJsCode
+}
 const props = defineProps({
   city: {
     type: String,
     default: ''
   }
 })
+
+const store = useStore()
+
+const routeURI = ref('')
 
 const initMap = (city: string) => {
   const center = cityLocation.filter(item => {
@@ -23,12 +31,34 @@ const initMap = (city: string) => {
   AMapLoader.load({
     key: AMapKey,
     version: '2.0',
-    plugins: [],
+    plugins: ['AMap.CitySearch'],
   }).then((AMap) => {
-    cityMap.value = new AMap.Map('cityMap', {
+    cityMap = new AMap.Map('cityMap', {
       viewMode: "3D",
       zoom: 9,
       center: center
+    })
+
+    const citySearch = new AMap.CitySearch()
+    citySearch.getLocalCity((status: string, result: Record<string, any>) => {
+      if (status === 'complete' && result.info === 'OK') {
+        if (result && result.city) {
+          const startPointCity = result.city
+          const startPointRectangle = result.rectangle
+          const startPointLngLatStr = startPointRectangle.split(';')
+          let startPointX: number = 0, startPointY: number = 0
+          startPointLngLatStr.forEach((item: string) => {
+            startPointX += parseFloat(item.split(',')[0])
+            startPointY += parseFloat(item.split(',')[1])
+          })
+          const [endPointX, endPointY] = center
+          const endPointCity = city
+          routeURI.value = `https://uri.amap.com/navigation?from=${startPointX / 2},${startPointY / 2},${startPointCity}&to=${endPointX},${endPointY},${endPointCity}`
+          store.$patch(state => {
+            state.routeURI = routeURI.value
+          })
+        }
+      }
     })
   })
 };
@@ -36,6 +66,10 @@ const initMap = (city: string) => {
 onMounted(() => {
   initMap(props.city)
 });
+
+onUnmounted(() => {
+  cityMap?.destroy()
+})
 </script>
 
 <style lang="scss" scoped>
